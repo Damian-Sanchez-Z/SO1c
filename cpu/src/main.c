@@ -1,8 +1,14 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <utils/hello.h>
+#include "../include/main.h"
 
 int main(int argc, char* argv[]) {
-    decir_hola("CPU");
-    return 0;
+    iniciar_logger_cpu();
+
+    char* config_path = argv[1];
+
+    if(iniciar_config_cpu(config_path) == FAILURE)
+        return EXIT_FAILURE;
+
+    iniciar_servidor_cpu();
+
+    return EXIT_SUCCESS;
 }
