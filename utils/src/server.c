@@ -1,4 +1,4 @@
-#include "server.h"
+#include "../include/server.h"
 
 int iniciar_servidor(char *ip, char *puerto)
 {
@@ -22,7 +22,7 @@ int iniciar_servidor(char *ip, char *puerto)
   bool escucha = !(listen(socketServidor, SOMAXCONN));
   free(servinfo);
 
-  return escucha ? socketServidor : DESCONEXION;
+  return escucha ? socketServidor : -1;
 }
 
 int esperar_cliente(int socketServidor)
