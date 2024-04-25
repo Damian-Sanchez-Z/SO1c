@@ -1,4 +1,4 @@
-#include "cliente.h"
+#include "../include/cliente.h"
 
 
 int crear_conexion_con_servidor(char *ip, char *puerto)
@@ -20,7 +20,7 @@ int crear_conexion_con_servidor(char *ip, char *puerto)
   bool conexion = !(connect(socketCliente, servinfo->ai_addr, servinfo->ai_addrlen));
   freeaddrinfo(servinfo);
 
-  return conexion ? socketCliente : DESCONEXION;
+  return conexion ? socketCliente : -1;
 }
 
 
@@ -30,7 +30,7 @@ void liberar_conexion_con_servidor(int socketCliente)
   close(socketCliente);
 }
 
-void terminar_programa(int socket, Config *config, Logger *logger)
+void terminar_programa(int socket, t_config *config, t_log *logger)
 {
   liberar_conexion_con_servidor(socket);
   config_destroy(config);

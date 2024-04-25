@@ -1,7 +1,20 @@
 #ifndef CLIENTE_H
 #define CLIENTE_H
 
+#include <pthread.h>
+#include <semaphore.h>
+#include "cliente.h"
+#include "server.h"
+
 #include "socket.h"
+#include<commons/log.h>
+#include<commons/log.h>
+#include<commons/string.h>
+#include<commons/config.h>
+#include<readline/readline.h>
+
+#define SUCCESS 0
+#define FAILURE -1
 
 /**
  * @brief Crea una conexión con un servidor específico.

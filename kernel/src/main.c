@@ -1,8 +1,17 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <utils/hello.h>
+#include <utils.h>
 
 int main(int argc, char* argv[]) {
-    decir_hola("Kernel");
-    return 0;
+    
+    iniciar_logger_kernel();
+
+    char* config_path = argv[1];
+
+    if(iniciar_config_kernel(config_path) == 0) 
+        return EXIT_FAILURE;
+
+    iniciar_servidor_kernel();
+
+    return EXIT_SUCCESS;
 }
