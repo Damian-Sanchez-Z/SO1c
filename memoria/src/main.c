@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv[]) {
 
-    iniciar_logger_memoria();
+    logger = iniciar_logger_memoria();
 
     char* config_path = argv[1];
 
