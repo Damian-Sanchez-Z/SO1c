@@ -14,8 +14,6 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-extern const char* ip = "localhost:3000";
-
 extern Logger *logger;
 extern Config *config;
 extern Hilo hilo_kernel;
@@ -24,7 +22,7 @@ extern int socket_cpu_dispatch;
 extern int socket_cpu_interrupt;
 
 void iniciar_logger_cpu();
-int iniciar_config_cpu(char*);
-int iniciar_servidor_cpu();
+int iniciar_config_cpu(char* path);
+int iniciar_servidor_cpu(char* ip);
 
 #endif //CPU_UTILS_H
