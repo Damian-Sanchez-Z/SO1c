@@ -1,6 +1,6 @@
-#include "main.h"
+#include "../include/config.h"
 
-void iniciar_config_memoria(config_path)
+void iniciar_config_memoria(char* config_path)
 {
 	config_raw = config_create(config_path);
 
@@ -17,4 +17,19 @@ void iniciar_config_memoria(config_path)
 	config.path_instrucciones = config_get_string_value(config_raw, "PATH_INSTRUCCIONES");
 	config.retardo_memoria = config_get_string_value(config_raw, "RETARDO_MEMORIA");
 
+}
+
+int iniciar_servidor_memoria()
+{
+    log_info(logger, "[CPU]: Iniciando Servidores De Dispatch e Interrupt...");
+    socket_memoria = iniciar_servidor(ip, config.puerto);
+
+    if (socket_memoria < 0 || socket_memoria < 0)
+    {
+        log_error(logger, "[CPU]: Error intentando iniciar Servidores.");
+        return FAILURE;
+    }
+
+    log_info(logger, "[CPU]: Servidores iniciados correctamente.");
+    return SUCCESS;
 }

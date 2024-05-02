@@ -9,6 +9,7 @@
 #define ARCHIVO_CONFIG "config/cpu.config"
 
 #include "commons.h"
+#include "../../utils/include/server.h"
 
 #define SUCCESS 0
 #define FAILURE 1

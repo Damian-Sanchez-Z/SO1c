@@ -18,5 +18,5 @@ typedef __int64_t int64_t;
 typedef t_config Config;
 typedef t_log Logger;
 typedef pthread_t Hilo;
-
+c
 #endif //CPU_COMMONS_H

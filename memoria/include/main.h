@@ -1,9 +1,14 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include"log.h"
 #include"string.h"
-#include"config.h"
+#include <commons/log.h>
+#include <commons/string.h>
+#include <commons/config.h>
 #include<readline/readline.h>
+#include "../../utils/include/server.h"
+
+#include "../include/logger.h"
+#include "../include/config.h"
 
 t_log* logger;
 void iniciar_config(void);

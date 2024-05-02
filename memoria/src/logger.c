@@ -1,4 +1,4 @@
-#include "main.h"
+#include "../include/logger.h"
 
 t_log* iniciar_logger_memoria()
 {
