@@ -1,8 +1,15 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <utils/hello.h>
+#include "main.h"
 
 int main(int argc, char* argv[]) {
-    decir_hola("Memoria");
-    return 0;
+
+    logger = iniciar_logger_memoria();
+
+    char* config_path = argv[1];
+
+    iniciar_config_memoria(config_path);
+
+    iniciar_servidor_memoria();
+
+    return EXIT_SUCCESS;
+
 }
