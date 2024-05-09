@@ -1,3 +1,5 @@
+#ifndef MEMORIA_MAIN_H
+#define MEMORIA_MAIN_H
 #include<stdio.h>
 #include<stdlib.h>
 #include"string.h"
@@ -11,16 +13,18 @@
 #include "../include/config.h"
 
 t_log* logger;
-void iniciar_config(void);
 t_config* config_raw;
 
-typedef struct 
-{
+void iniciar_config(void);
+
+typedef struct MEM_CONFIG{
     int puerto;
     int tamanio_memoria;
     int tamanio_pagina;
     char* path_instrucciones;
     int retardo_memoria;
-} MEM_CONFIG;
+}MEM_CONFIG;
 
 MEM_CONFIG config;
+
+#endif
