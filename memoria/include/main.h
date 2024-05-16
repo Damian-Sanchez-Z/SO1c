@@ -14,7 +14,7 @@ t_log* logger;
 void iniciar_config(void);
 t_config* config_raw;
 
-typedef struct 
+typedef struct CONFIG_MEMORIA
 {
     int puerto;
     int tamanio_memoria;
@@ -24,3 +24,8 @@ typedef struct
 } MEM_CONFIG;
 
 MEM_CONFIG config;
+
+typedef struct OPERACION_MEMORIA{
+    int codigo_de_operacion;
+    char* operando_de_operacion;
+} OPERACION;

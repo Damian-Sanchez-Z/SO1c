@@ -21,15 +21,15 @@ void iniciar_config_memoria(char* config_path)
 
 int iniciar_servidor_memoria()
 {
-    log_info(logger, "[CPU]: Iniciando Servidores De Dispatch e Interrupt...");
+    log_info(logger, "[MEM]: Iniciando Servidores De Dispatch e Interrupt...");
     socket_memoria = iniciar_servidor(ip, config.puerto);
 
     if (socket_memoria < 0 || socket_memoria < 0)
     {
-        log_error(logger, "[CPU]: Error intentando iniciar Servidores.");
+        log_error(logger, "[MEM]: Error intentando iniciar Servidores.");
         return FAILURE;
     }
 
-    log_info(logger, "[CPU]: Servidores iniciados correctamente.");
+    log_info(logger, "[MEM]: Servidores iniciados correctamente.");
     return SUCCESS;
 }
