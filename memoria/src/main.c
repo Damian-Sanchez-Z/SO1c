@@ -12,54 +12,149 @@ int main(int argc, char* argv[]) {
 
     // obtener_operacion(config.path_instrucciones);
 
+    // crear_hilo_operaciones();
+
     return EXIT_SUCCESS;
 
 }
 
-int codigo_de_operacion(char* path){
+void abrir_archivo_y_enviar_instrucciones(char* path){
 
-    int codop;
-    FILE* archivo;
-    archivo = fopen(path, "r");
-    fread(codop, 1, archivo);
-    if(fread(codop, 1, archivo) == 0){
-        printf("No se pudo leer el archivo");
+    long tamanio_archivo;
+
+    char* contenido_archivo;
+
+    FILE* archivo_instrucciones;
+
+    archivo_instrucciones = fopen(path, "r");
+
+    if(archivo_instrucciones == NULL){
+
+        printf("No se pudo abrir el archivo");
+
+        return;
+
     }
-    return codop;
+
+    fseek(archivo_instrucciones, 0, SEEK_END);                          // busco el final del archivo para saber cual es el tamanio
+
+    tamanio_archivo = ftell(archivo_instrucciones);
+
+    rewind(archivo_instrucciones);                               //vuelvo a apuntar al principio del archivo
+
+    contenido_archivo = (char *) malloc(tamanio_archivo + 1);      // casteo a char* y reservo memoria
+
+    if(contenido_archivo == NULL){
+
+        printf("No se pudo reservar memoria");
+
+        return;
+    }
+
+    fread(contenido_archivo, 1, tamanio_archivo, archivo_instrucciones);
+
+    contenido_archivo[tamanio_archivo + 1] = '\0';        //asigno caracter de fin de string
+
+    cargar_y_enviar_instrucciones(contenido_archivo, (tamanio_archivo + 1));
+
+    free(contenido_archivo);
+
+    fclose(archivo_instrucciones);
 
 }
 
+void cargar_y_enviar_instrucciones(char* vector_instrucciones, long posicion_caracter_fin){
 
-// TENGO QUE DEFINIR UNA CANTIDAD DE BYTES PARA EL OPERANDO POR OPERACION
+    char* codop;
 
-char* operando_de_operacion(char* path){
+    char* operando;
+
+    OPERACION* operacion;
+
+    operacion = (OPERACION*) malloc(sizeof(OPERACION));
+
+    vector_instrucciones = malloc(posicion_caracter_fin * sizeof(char));
+
+    codop = (char*) malloc(sizeof(char) * 20);
+
+    operando = (char*) malloc(sizeof(char) * 50);
+
+    int contador_operando = 0;
+
+    int contador_codop = 0;
+
+    t_paquete paquete;
+
+    for(int i=0; i < posicion_caracter_fin; i++){
+
+        if(vector_instrucciones[i] == ' '){
+
+            i++;
+
+            do{
+                (asignar_a_operando(operacion, operando, contador_operando));
+
+                i++;
+
+                contador_operando ++;
+
+            } while(vector_instrucciones[i] != '\n');
 
 
-    int cantidad_bytes_operacion;
+        }
+
+        if(vector_instrucciones[i] == '\n'){
+
+            //wait(llegue pedido);
+
+            //crear_paquete();
+
+            //enviar_paquete(); 
+
+            //signal(puedo enviar);
 
 
-    char* operando = malloc(sizeof(char));
-    FILE* archivo;
-    archivo = fopen(path, "r");
-    fread(operando, cantidad_bytes_operacion, archivo);
-    if(fread(operando, cantidad_bytes_operacion, archivo) == 0){
-        printf("No se pudo obtener el operando");
+            i++;
+
+            contador_codop = 0;
+
+            contador_operando = 0;
+
+        }
+
+        asignar_a_codop(operacion, codop, contador_codop);
+
+        contador_codop ++;        
+
     }
-    return operando;    
+
+    free(codop);
+
     free(operando);
 
+    free(vector_instrucciones);
 }
 
-OPERACION* obtener_operacion(char* path){
+void asignar_a_codop(OPERACION* operacion, char codop, int contador){
 
-    OPERACION* operacion = malloc(sizeof(OPERACION));
-    int codop;
-    char* operando;
-    codop = codigo_de_operacion(path);
-    operando = operando_de_operacion(path);
-    operacion.codigo_de_operacion = codop;
-    operacion.operando_de_operacion = operando;
-    return operacion;
-    free(operacion);
+    operacion->codigo_de_operacion[contador] = codop;
 
 }
+
+void asignar_a_operando(OPERACION* operacion, char operando, int contador){
+
+    operacion->operando_de_operacion[contador] = operando;
+
+}
+
+
+void crear_hilo_operaciones(char* path){
+
+    pthread_t hilo_obtener_operaciones;
+
+    pthread_create(hilo_obtener_operaciones, NULL, abrir_archivo_y_enviar_instrucciones, path);
+
+    pthread_detach(hilo_obtener_operaciones);
+
+}
+
