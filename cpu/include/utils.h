@@ -31,6 +31,8 @@ int conectar_con_memoria();
 void conectar_con_kernel();
 void terminar_ejecucion();
 
+void asignar_a_registro(char *valor, char *registro_instr, PCB *pcb);
+int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb);
 
 
 

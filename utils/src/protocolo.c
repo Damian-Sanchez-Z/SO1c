@@ -17,3 +17,14 @@ PCB *deserializar_pcb(BUFFER *buffer)
 
     return pcb;
 }
+
+PAQUETE *crear_paquete(CODIGO_OPERACION codigoOperacion)
+{
+  PAQUETE *paquete = malloc(sizeof(PAQUETE));
+
+  paquete->codigo_operacion = codigoOperacion;
+  inicializar_buffer(paquete);
+
+  return paquete;
+}
+
