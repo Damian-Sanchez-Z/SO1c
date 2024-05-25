@@ -10,6 +10,7 @@
 
 #include "commons.h"
 #include "../../utils/include/server.h"
+#include "utils/include/protocolo.h"
 
 #define SUCCESS 0
 #define FAILURE 1
@@ -20,9 +21,19 @@ extern Hilo hilo_kernel;
 
 extern int socket_cpu_dispatch;
 extern int socket_cpu_interrupt;
+extern int socket_memoria;
+extern int socket_kernel;
 
 void iniciar_logger_cpu();
 int iniciar_config_cpu(char* path);
 int iniciar_servidor_cpu(char* ip);
+int conectar_con_memoria();
+void conectar_con_kernel();
+void terminar_ejecucion();
+
+void asignar_a_registro(char *valor, char *registro_instr, PCB *pcb);
+int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb);
+
+
 
 #endif //CPU_UTILS_H
