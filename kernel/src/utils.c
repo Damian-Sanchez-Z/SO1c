@@ -1,26 +1,9 @@
-#include"utils.h"
+#include"../include/utils.h"
 
 t_log* logger;
 t_config* config;
 int socket_kernel;
-typedef struct kernel_config
-{
-    char *IP;
-    char *PUERTO_ESCUCHA;
-    char *IP_CPU;
-    char *PUERTO_CPU;
-    char *IP_MEMORIA;
-    char *PUERTO_MEMORIA;
-    char *IP_FILESYSTEM;
-    char *PUERTO_FILESYSTEM;
-    char *ALGORITMO_PLANIFICACION;
-    char *ESTIMACION_INICIAL;
-    char *HRRN_ALFA;
-    char *GRADO_MAX_MULTIPROGRAMACION;
-    char **RECURSOS;
-    char **INSTANCIAS_RECURSOS;
-} kernel_config;
-kernel_config KernelConfig;
+
 
 void iniciar_logger_kernel()
 {
@@ -51,6 +34,7 @@ int iniciar_config_kernel(char* path)
     KernelConfig.GRADO_MAX_MULTIPROGRAMACION = config_get_string_value(config, "GRADO_MAX_MULTIPROGRAMACION");
     KernelConfig.RECURSOS = config_get_array_value(config, "RECURSOS");
     KernelConfig.INSTANCIAS_RECURSOS = config_get_array_value(config, "INSTANCIAS_RECURSOS");
+    KernelConfig.QUANTUM = config_get_int_value(config, "QUANTUM");
 
     log_info(logger, "[KERNEL]: Archivo Config creado y rellenado correctamente");
     return SUCCESS;

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <utils.h>
+#include "../include/utils.h"
+
 
 int main(int argc, char* argv[]) {
     
@@ -15,3 +16,5 @@ int main(int argc, char* argv[]) {
 
     return EXIT_SUCCESS;
 }
+
+
