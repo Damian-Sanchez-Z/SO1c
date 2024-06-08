@@ -20,6 +20,7 @@
 
 typedef t_config Config;
 typedef t_list Lista;
+typedef pthread_t Hilo;
 
 extern t_log* logger;
 
