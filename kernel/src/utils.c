@@ -1,15 +1,7 @@
 #include"../include/utils.h"
 
-t_log* logger;
 t_config* config;
 int socket_kernel;
-
-
-void iniciar_logger_kernel()
-{
-    logger = log_create(ARCHIVO_LOGGER, "Kernel", 1, LOG_LEVEL_INFO);
-    log_info(logger, "[KERNEL]: Logger creado correctamente");
-}
 
 int iniciar_config_kernel(char* path)
 {

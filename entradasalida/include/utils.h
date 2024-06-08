@@ -20,6 +20,21 @@
 #define SUCCESS 0
 #define FAILURE -1
 
+t_config* config;
+
+typedef struct interfaz_config{
+    char *TIPO_INTERFAZ;
+    int *TIEMPO_UNIDAD_TRABAJO;
+    char *IP_KERNEL;
+    int *PUERTO_KERNEL;
+    char *IP_MEMORIA;
+    int *PUERTO_MEMORIA;
+    char *PATH_BASE_DIALFS;
+    int *BLOCK_SIZE;
+    int *BLOCK_COUNT;
+    int *RETRASO_COMPACTACION;
+}interfaz_config;
+
 void iniciar_logger_interfaz();
 int iniciar_config_interfaz(char*);
 int iniciar_cliente_interfaz(char* ip, char* puerto);

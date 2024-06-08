@@ -21,19 +21,20 @@
 typedef t_config Config;
 typedef t_list Lista;
 
+extern t_log* logger;
+
 BUFFER* recibir_buffer(int socket);
 PCB* deserializar_pcb(BUFFER *buffer);
 PAQUETE *crear_paquete(CODIGO_OPERACION codigoOperacion);
 
-
-
 typedef enum
 {
     // DESCONEXION = -1,
-    // MENSAJE,
+    MENSAJE,
     // PAQUETE_CPU, // TODO: CHEQUEAR NOMBRE REDEFINIDOS ?
     // OP_PCB,
     INSTRUCCION,
+    PAQUETE,
     // INSTRUCCIONES,
     // CREAR_PROCESO,
     // FINALIZAR_PROCESO,
@@ -110,34 +111,6 @@ typedef struct
     CODIGO_OPERACION codigo_operacion;
     BUFFER *buffer;
 } PAQUETE;
-
-typedef enum
-{
-    DESCONEXION = -1,
-    MENSAJE,
-    PAQUETE_CPU, // TODO: CHEQUEAR NOMBRE REDEFINIDOS ?
-    OP_PCB,
-    INSTRUCCION,
-    INSTRUCCIONES,
-    CREAR_PROCESO,
-    FINALIZAR_PROCESO,
-    SEG_FAULT,
-    RECEPCION_OK,
-    PROCESO_FINALIZADO,
-    CREAR_SEGMENTO,
-    BORRAR_SEGMENTO,
-    CONSOLIDAR,
-    SOLICITAR_COMPACTACION,
-    COMPACTACION_TERMINADA,
-    FALTA_MEMORIA,
-    FINALIZO_TRUNCADO,
-    FINALIZO_LECTURA,
-    FINALIZO_ESCRITURA,
-    READ,
-    WRITE,
-    RESPUESTA_FILE_SYSTEM
-
-} CODIGO_OPERACION;
 
 typedef struct
 {

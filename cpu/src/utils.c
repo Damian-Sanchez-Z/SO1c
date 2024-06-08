@@ -3,14 +3,7 @@
 int socket_cpu_dispatch;
 int socket_cpu_interrupt;
 
-Logger *logger;
 Config *config;
-
-void iniciar_logger_cpu()
-{
-    logger = log_create(ARCHIVO_LOGGER, "CPU", 1, LOG_LEVEL_INFO);
-    log_info(logger, "[CPU]: Logger creado correctamente");
-}
 
 int iniciar_config_cpu(char* path)
 {

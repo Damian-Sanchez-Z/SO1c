@@ -23,8 +23,6 @@ int crear_conexion_con_servidor(char *ip, char *puerto)
   return conexion ? socketCliente : -1;
 }
 
-
-
 void liberar_conexion_con_servidor(int socketCliente)
 {
   close(socketCliente);

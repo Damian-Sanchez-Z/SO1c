@@ -1,21 +1,5 @@
 #include <utils.h>
 
-t_log* logger;
-t_config* config;
-typedef struct interfaz_config{
-    char *TIPO_INTERFAZ;
-    int *TIEMPO_UNIDAD_TRABAJO;
-    char *IP_KERNEL;
-    int *PUERTO_KERNEL;
-    char *IP_MEMORIA;
-    int *PUERTO_MEMORIA;
-    char *PATH_BASE_DIALFS;
-    int *BLOCK_SIZE;
-    int *BLOCK_COUNT;
-    int *RETRASO_COMPACTACION;
-}interfaz_config;
-interfaz_config interfazConfig;
-
 void iniciar_logger_interfaz()
 {
     logger = log_create(ARCHIVO_LOGGER, "INTERFAZ", 1, LOG_LEVEL_INFO);
