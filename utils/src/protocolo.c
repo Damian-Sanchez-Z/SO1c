@@ -73,72 +73,34 @@ BUFFER* recibir_buffer(int socket) {
 	return buffer;
 }
 
-int recibir_operacion(int socket_cliente)
+PCB *deserializar_pcb(BUFFER *buffer)
 {
-	int cod_op;
-	if(recv(socket_cliente, &cod_op, sizeof(int), MSG_WAITALL) > 0)
-		return cod_op;
-	else
-	{
-		close(socket_cliente);
-		return -1;
-	}
+    PCB *pcb = malloc(sizeof(PCB));
+    //Falta implementar
+
+    return pcb;
 }
 
-void recibir_mensaje(int socket_cliente)
+PAQUETE *crear_paquete(CODIGO_OPERACION codigoOperacion)
 {
-	int size;
-	char* buffer = recibir_buffer(&size, socket_cliente);
-	log_info(logger, "Me llego el mensaje %s", buffer);
-	free(buffer);
+  PAQUETE *paquete = malloc(sizeof(PAQUETE));
+
+  paquete->codigo_operacion = codigoOperacion;
+  inicializar_buffer(paquete);
+
+  return paquete;
 }
 
-t_list* recibir_paquete(int socket_cliente)
+void enviar_paquete_a_cliente(PAQUETE *paquete, int socketCliente)
 {
-	int size;
-	int desplazamiento = 0;
-	void * buffer;
-	t_list* valores = list_create();
-	int tamanio;
-
-	buffer = recibir_buffer(&size, socket_cliente);
-	while(desplazamiento < size)
-	{
-		memcpy(&tamanio, buffer + desplazamiento, sizeof(int));
-		desplazamiento+=sizeof(int);
-		char* valor = malloc(tamanio);
-		memcpy(valor, buffer+desplazamiento, tamanio);
-		desplazamiento+=tamanio;
-		list_add(valores, valor);
-	}
-	free(buffer);
-	return valores;
-}
-void enviar_mensaje(char* mensaje, int socket_cliente)
-{
-	t_paquete* paquete = malloc(sizeof(t_paquete));
-
-	paquete->codigo_operacion = MENSAJE;
-	paquete->buffer = malloc(sizeof(t_buffer));
-	paquete->buffer->size = strlen(mensaje) + 1;
-	paquete->buffer->stream = malloc(paquete->buffer->size);
-	memcpy(paquete->buffer->stream, mensaje, paquete->buffer->size);
-
-	int bytes = paquete->buffer->size + 2*sizeof(int);
-
-	void* a_enviar = serializar_paquete(paquete, bytes);
-
-	send(socket_cliente, a_enviar, bytes, 0);
-
-	free(a_enviar);
-	eliminar_paquete(paquete);
+  enviar_paquete_a_servidor(paquete, socketCliente);
 }
 
-void enviar_paquete(t_paquete* paquete, int socket_cliente)
+void enviar_paquete_a_servidor(PAQUETE *paquete, int socketCliente)
 {
-	int bytes = paquete->buffer->size + 2*sizeof(int);
-	void* a_enviar = serializar_paquete(paquete, bytes);
+  int bytes = paquete->buffer->size + 2 * sizeof(int);
+  void *aEnviar = serializar_paquete(paquete, bytes);
 
-	send(socket_cliente, a_enviar, bytes, 0);
-	free(a_enviar);
+  send(socketCliente, aEnviar, bytes, 0);
+  free(aEnviar);
 }

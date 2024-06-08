@@ -83,6 +83,12 @@ typedef struct
     char* nombreInstruccion;
     char* valor; // TODO: Chequear. SET AX HOLA
     char* registro; //Recibe nombr de registro, comparo y asigno al registro del PCB
+    char* registro_origen;
+    char* registro_destino;
+    char* numeroDeInstruccion;
+    IO_Interface IO_Interface;
+    int32_t unidades_de_trabajo;
+    //--------------//
     int32_t direccionLogica;
     int32_t direccionFisica;
     int32_t tiempo;

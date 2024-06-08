@@ -31,8 +31,14 @@ int conectar_con_memoria();
 void conectar_con_kernel();
 void terminar_ejecucion();
 
+void cambiarValorProgramCounter(char *valor, PCB *pcb);
 void asignar_a_registro(char *valor, char *registro_instr, PCB *pcb);
 int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb);
+void ejecutar_set(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb);
+void ejecutar_SUM(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb);
+void ejecutar_SUB(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb);
+void ejecutar_jnz(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb);
+void ejecutar_io_gen_sleep(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb);
 
 
 
