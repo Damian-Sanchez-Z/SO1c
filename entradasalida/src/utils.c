@@ -1,4 +1,4 @@
-#include <utils.h>
+#include "../include/utils.h"
 
 void iniciar_logger_interfaz()
 {
@@ -14,16 +14,16 @@ int iniciar_config_interfaz(char* path)
         log_error(logger,"[KERNEL]: ERROR AL INICIAR CONFIG INICIAL DE INTERFAZ");
         return FAILURE;
     }
-    interfazConfig.TIPO_INTERFAZ = config_get_string_value(config, "TIPO_INTERFAZ");
-    interfazConfig.TIEMPO_UNIDAD_TRABAJO = config_get_int_value(config, "TIEMPO_UNIDAD_TRABAJO");
-    interfazConfig.IP_KERNEL = config_get_string_value(config, "IP_KERNEL");
-    interfazConfig.PUERTO_KERNEL = config_get_int_value(config, "PUERTO_KERNEL");
-    interfazConfig.IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
-    interfazConfig.PUERTO_MEMORIA = config_get_int_value(config, "PUERTO_MEMORIA");
-    interfazConfig.PATH_BASE_DIALFS = config_get_string_value(config, "PATH_BASE_DIALFS");
-    interfazConfig.BLOCK_SIZE = config_get_int_value(config, "BLOCK_SIZE");
-    interfazConfig.BLOCK_COUNT = config_get_int_value(config, "BLOCK_COUNT");
-    interfazConfig.RETRASO_COMPACTACION = config_get_int_value(config, "RETRASO_COMPACTACION");
+    config_io.TIPO_INTERFAZ = config_get_string_value(config, "TIPO_INTERFAZ");
+    config_io.TIEMPO_UNIDAD_TRABAJO = config_get_int_value(config, "TIEMPO_UNIDAD_TRABAJO");
+    config_io.IP_KERNEL = config_get_string_value(config, "IP_KERNEL");
+    config_io.PUERTO_KERNEL = config_get_int_value(config, "PUERTO_KERNEL");
+    config_io.IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
+    config_io.PUERTO_MEMORIA = config_get_int_value(config, "PUERTO_MEMORIA");
+    config_io.PATH_BASE_DIALFS = config_get_string_value(config, "PATH_BASE_DIALFS");
+    config_io.BLOCK_SIZE = config_get_int_value(config, "BLOCK_SIZE");
+    config_io.BLOCK_COUNT = config_get_int_value(config, "BLOCK_COUNT");
+    config_io.RETRASO_COMPACTACION = config_get_int_value(config, "RETRASO_COMPACTACION");
 
     log_info(logger, "[INTERFAZ]: Archivo Config creado y rellenado correctamente");
     return SUCCESS;

@@ -43,7 +43,7 @@ void agregar_a_paquete(PAQUETE *paquete, void *valor, int tamanio)
 
 void *serializar_paquete(PAQUETE *paquete, int bytes)
 {
-    void *magic = malloc(bytes);
+    void *magic = malloc(bytes); 
     int desplazamiento = 0;
 
     memcpy(magic + desplazamiento, &(paquete->codigo_operacion), sizeof(int));
@@ -53,14 +53,6 @@ void *serializar_paquete(PAQUETE *paquete, int bytes)
     memcpy(magic + desplazamiento, paquete->buffer->stream, paquete->buffer->size);
 
     return magic;
-}
-
-PCB *deserializar_pcb(BUFFER *buffer)
-{
-    PCB *pcb = malloc(sizeof(PCB));
-    //Falta implementar
-
-    return pcb;
 }
 
 BUFFER* recibir_buffer(int socket) {
@@ -81,15 +73,6 @@ PCB *deserializar_pcb(BUFFER *buffer)
     return pcb;
 }
 
-PAQUETE *crear_paquete(CODIGO_OPERACION codigoOperacion)
-{
-  PAQUETE *paquete = malloc(sizeof(PAQUETE));
-
-  paquete->codigo_operacion = codigoOperacion;
-  inicializar_buffer(paquete);
-
-  return paquete;
-}
 
 void enviar_paquete_a_cliente(PAQUETE *paquete, int socketCliente)
 {

@@ -8,9 +8,13 @@
 }]]></component>
   <component name="CMakeRunConfigurationManager">
     <generated>
+      <config projectName="entradasalida" targetName="helgrind" />
+      <config projectName="entradasalida" targetName="memcheck" />
+      <config projectName="entradasalida" targetName="release" />
+      <config projectName="entradasalida" targetName="start" />
       <config projectName="entradasalida" targetName="makefile" />
-      <config projectName="entradasalida" targetName="Makefile" />
-      <config projectName="entradasalida" targetName="GNUmakefile" />
+      <config projectName="entradasalida" targetName="all" />
+      <config projectName="entradasalida" targetName="debug" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -19,17 +23,23 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c578e110-e16a-4f71-ab95-812ce9d14caf" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../cpu/include/commons.h" beforeDir="false" afterPath="$PROJECT_DIR$/../cpu/include/commons.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../cpu/include/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/../cpu/include/utils.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/c_cpp_properties.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/tasks.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/settings.mk" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" />
+    <list default="true" id="10c4ceca-4955-4fdc-b293-3f567e953479" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/settings.mk" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../memoria/include/instrucciones.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kernel/include/utils.h" beforeDir="false" afterPath="$PROJECT_DIR$/../kernel/include/utils.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kernel/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../kernel/src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kernel/src/planificadores.c" beforeDir="false" afterPath="$PROJECT_DIR$/../kernel/src/planificadores.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memoria/include/main.h" beforeDir="false" afterPath="$PROJECT_DIR$/../memoria/include/main.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memoria/src/instrucciones.c" beforeDir="false" afterPath="$PROJECT_DIR$/../memoria/src/instrucciones.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../memoria/src/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../memoria/src/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../utils/include/protocolo.h" beforeDir="false" afterPath="$PROJECT_DIR$/../utils/include/protocolo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../utils/src/protocolo.c" beforeDir="false" afterPath="$PROJECT_DIR$/../utils/src/protocolo.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,9 +50,6 @@
     <option name="formatViaClangd" value="false" />
   </component>
   <component name="ExternalProjectsData">
-    <projectState path="$PROJECT_DIR$/..">
-      <ProjectState />
-    </projectState>
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
@@ -69,22 +76,6 @@
             </list>
           </value>
         </entry>
-        <entry>
-          <key>
-            <ExternalProjectPojo>
-              <option name="name" value="entradasalida" />
-              <option name="path" value="$PROJECT_DIR$/.." />
-            </ExternalProjectPojo>
-          </key>
-          <value>
-            <list>
-              <ExternalProjectPojo>
-                <option name="name" value="entradasalida" />
-                <option name="path" value="$PROJECT_DIR$/.." />
-              </ExternalProjectPojo>
-            </list>
-          </value>
-        </entry>
       </map>
     </option>
     <option name="projectSyncType">
@@ -93,12 +84,15 @@
       </map>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectApplicationVersion">
     <option name="ide" value="CLion" />
     <option name="majorVersion" value="2022" />
     <option name="minorVersion" value="2.4" />
   </component>
-  <component name="ProjectId" id="2fvgB4mBKeHNzfuv1611paWehnh" />
+  <component name="ProjectId" id="2hc9Gkzd4zCEEGYJnHWNpgXFdK5" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -112,21 +106,26 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/home/utnso/Downloads/2024/tp-2024-1c-Power-Milanga/entrada_salida"
+    "last_opened_file_path": "/home/utnso/Downloads/2024/tp-2024-1c-Power-Milanga/cpu/makefile"
   }
 }]]></component>
-  <component name="RunManager" selected="Makefile Application.GNUmakefile">
+  <component name="RunManager" selected="Makefile Application.all">
     <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="CLION.EXTERNAL.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GNUmakefile" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="entradasalida" TARGET_NAME="GNUmakefile" CONFIG_NAME="GNUmakefile" version="1">
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="entradasalida" TARGET_NAME="all" CONFIG_NAME="all" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Makefile" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="entradasalida" TARGET_NAME="Makefile" CONFIG_NAME="Makefile" version="1">
+    <configuration name="debug" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="entradasalida" TARGET_NAME="debug" CONFIG_NAME="debug" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="helgrind" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="entradasalida" TARGET_NAME="helgrind" CONFIG_NAME="helgrind" version="1">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
@@ -136,21 +135,40 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
+    <configuration name="memcheck" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="entradasalida" TARGET_NAME="memcheck" CONFIG_NAME="memcheck" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="release" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="entradasalida" TARGET_NAME="release" CONFIG_NAME="release" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="start" type="CLionNativeAppRunConfigurationType" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="entradasalida" TARGET_NAME="start" CONFIG_NAME="start" version="1">
+      <method v="2">
+        <option name="CLION.COMPOUND.BUILD" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Makefile Application.GNUmakefile" />
-      <item itemvalue="Makefile Application.Makefile" />
+      <item itemvalue="Makefile Application.all" />
+      <item itemvalue="Makefile Application.debug" />
+      <item itemvalue="Makefile Application.helgrind" />
+      <item itemvalue="Makefile Application.memcheck" />
+      <item itemvalue="Makefile Application.release" />
+      <item itemvalue="Makefile Application.start" />
       <item itemvalue="Makefile Application.makefile" />
     </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c578e110-e16a-4f71-ab95-812ce9d14caf" name="Changes" comment="" />
-      <created>1714686827409</created>
+      <changelist id="10c4ceca-4955-4fdc-b293-3f567e953479" name="Changes" comment="" />
+      <created>1717882404933</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1714686827409</updated>
-      <workItem from="1714686830054" duration="149000" />
+      <updated>1717882404933</updated>
+      <workItem from="1717882406709" duration="268000" />
     </task>
     <servers />
   </component>

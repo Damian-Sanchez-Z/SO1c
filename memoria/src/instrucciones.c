@@ -1,4 +1,4 @@
-#include"../include/main.h"
+#include"../include/instrucciones.h"
 
 void crear_hilo_operaciones(char* path){
 
@@ -71,7 +71,7 @@ void cargar_y_enviar_instrucciones(char* vector_instrucciones, int posicion_cara
 
     int contador_codop = 0;
 
-    t_paquete* paquete;
+    PAQUETE * paquete;
 
     for(int i=0; i < posicion_caracter_fin; i++){
 

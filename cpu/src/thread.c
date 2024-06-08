@@ -1,4 +1,4 @@
-#include "thread.h"
+#include "../include/thread.h"
 
   PCB * recibir_pcb(int socket_kernel){
 

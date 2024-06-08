@@ -51,7 +51,7 @@ int conectar_con_memoria()
 void conectar_con_kernel()
 {
     log_info(logger, "[CPU]: Esperando conexiones de KERNEL..");
-    socket_kernel = esperar_cliente(socket_cpu);
+    socket_kernel = esperar_cliente(socket_kernel);
     log_info(logger, "[CPU]: Conexión de KERNEL establecida.");
 
     //crear hilo
@@ -252,7 +252,7 @@ int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb) // EXECUTE //CADA I
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_STDIN_READ"))
     {
-        ejecutar_io_stdin_read(); 
+        ejecutar_io_stdin_read();
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_STDOUT_WRITE"))
     {
@@ -379,12 +379,12 @@ void ejecutar_io_gen_sleep(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb)
                 instruccion->IO_Interface.nombre,
                 instruccion->unidades_de_trabajo);
 
-    PAQUETE *paquete_kernel = crear_paquete(PAQUETE_CPU);
+    PAQUETE *paquete_kernel = crear_paquete(paquete);
     agregar_a_paquete(paquete_kernel, &pcb->PID, sizeof(int32_t));
     agregar_a_paquete(paquete_kernel, &pcb->program_counter, sizeof(int32_t));
     agregar_a_paquete(paquete_kernel, &pcb->registros_cpu, sizeof(Registro_CPU));
     agregar_a_paquete(paquete_kernel, &instruccion->IO_Interface.id,sizeof(int32_t));
-    agregar_a_paquete(paquete_kernel, &instruccion->unidades_de_trabajo,sizeof(int32_t))
+    agregar_a_paquete(paquete_kernel, &instruccion->unidades_de_trabajo,sizeof(int32_t));
 
     enviar_paquete_a_cliente(paquete_kernel, socket_kernel);
     eliminar_paquete(paquete_kernel);

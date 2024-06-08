@@ -12,8 +12,10 @@
 #include <commons/string.h>
 #include <commons/config.h>
 #include <readline/readline.h>
-#include <../../utils/include/cliente.h>
-#include <../../utils/include/server.h>
+#include "../../utils/include/cliente.h"
+#include "../../utils/include/server.h"
+#include "../../utils/include/protocolo.h"
+#include "../../utils/include/logger.h"
 
 #define ARCHIVO_LOGGER "../interfaz.log"
 #define ARCHIVO_CONFIG "../interfaz.config"
@@ -33,7 +35,9 @@ typedef struct interfaz_config{
     int *BLOCK_SIZE;
     int *BLOCK_COUNT;
     int *RETRASO_COMPACTACION;
-}interfaz_config;
+} interfaz_config;
+
+extern interfaz_config config_io;
 
 void iniciar_logger_interfaz();
 int iniciar_config_interfaz(char*);

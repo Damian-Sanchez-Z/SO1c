@@ -1,7 +1,7 @@
 #include "../include/main.h"
 
 int main(int argc, char* argv[]) {
-    iniciar_logger_cpu();
+    iniciar_logger("CPU", "configs/cpu.log");
 
     char* config_path = argv[1];
 

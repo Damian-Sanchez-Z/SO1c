@@ -8,10 +8,11 @@
 #include<commons/config.h>
 #include<readline/readline.h>
 #include"../../utils/include/server.h"
-#include"utils.h"
+#include"../../utils/include/protocolo.h"
 
 #include"../include/logger.h"
 #include"../include/config.h"
+#include "instrucciones.h"
 
 t_config* config_raw;
 
@@ -30,3 +31,5 @@ typedef struct OPERACION_MEMORIA{
     char* codigo_de_operacion;
     char* operando_de_operacion;
 } OPERACION;
+
+#endif MEMORIA_MAIN_H

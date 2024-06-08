@@ -12,6 +12,7 @@
 #include<readline/readline.h>
 #include"../../utils/include/cliente.h"
 #include"../../utils/include/server.h"
+#include"../../utils/include/logger.h"
 
 #define ARCHIVO_LOGGER "config/kernel.log"
 #define ARCHIVO_CONFIG "config/kernel.config"
@@ -38,7 +39,7 @@ typedef struct kernel_config
 } kernel_config;
 
 extern kernel_config KernelConfig;
+extern int socket_cpu;
 
-void iniciar_logger_kernel();
 int iniciar_config_kernel(char*);
 int iniciar_servidor_kernel();

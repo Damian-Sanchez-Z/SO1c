@@ -8,11 +8,11 @@ t_list exit_state;
 int64_t PID;
 
 PCB* enviarACPU(PCB* pcb){
-    PAQUETE *paquete_pcb = crear_paquete(OP_PCB);
+    PAQUETE * paquete_pcb = crear_paquete(OP_PCB);
 
     paquete_pcb->buffer = serializar_pcb(pcb);
 
-    Instruccion* instruccion_enviar = list_get(&pcb->instructions, pcb->programCounter);
+    Instruccion* instruccion_enviar = list_get(&pcb->instructions, pcb->program_counter);
 
     enviar_paquete_a_servidor(paquete_pcb, socket_cpu);
 
@@ -27,8 +27,8 @@ void fifo(){
             PCB* actualProcess = list_remove(&ready_state, 0);
             while(true){
                 enviarACPU(&actualProcess);
-                actualProcess->programCounter++;
-                if(list_size(&actualProcess->instructions) > actualProcess->programCounter){
+                actualProcess->program_counter++;
+                if(list_size(&actualProcess->instructions) > actualProcess->program_counter){
                     list_add(&exit_state, &actualProcess);
                     break;
                 }
@@ -45,11 +45,11 @@ void roundRobin(){
             PCB* actualProcess = list_remove(&ready_state, 0);
             while(true){
                 enviarACPU(&actualProcess);
-                actualProcess->programCounter++;
-                if(list_size(&actualProcess->instructions) > actualProcess->programCounter){
+                actualProcess->program_counter++;
+                if(list_size(&actualProcess->instructions) > actualProcess->program_counter){
                     list_add(&exit_state, &actualProcess);
                     break;
-                } else if (actualProcess->programCounter % quantum == 0){
+                } else if (actualProcess->program_counter % quantum == 0){
                     list_add(&ready_state, &actualProcess);
                     break;
                 }
@@ -73,16 +73,20 @@ void ejecutarPlanificacion(){
 PCB* CrearPcb(){
 
     PCB *pcb = malloc(sizeof(PCB));
-    pcb->pid= PID;
+    pcb->PID = PID;
     PID++;
-    pcb->programCounter = 0;
+    pcb->program_counter = 0;
     pcb->instructions = *list_create();
     pcb->quantum = 0;
-    pcb->registers.AX = 0;
-    pcb->registers.BX = 0;
-    pcb->registers.CX = 0;
-    pcb->registers.DX = 0;
-    pcb->registers.EAX = 0;
-    pcb->registers.EBX = 0;
-    pcb->registers.ECX = 0;
+    pcb->registros_cpu.PC = 0;
+    pcb->registros_cpu.AX = 0;
+    pcb->registros_cpu.BX = 0;
+    pcb->registros_cpu.CX = 0;
+    pcb->registros_cpu.DX = 0;
+    pcb->registros_cpu.EAX = 0;
+    pcb->registros_cpu.EBX = 0;
+    pcb->registros_cpu.ECX = 0;
+    pcb->registros_cpu.EDX = 0;
+    pcb->registros_cpu->SI = 0;
+    pcb->registros_cpu->DI = 0;
 }

@@ -1,10 +1,10 @@
-#include <include/main.h>
+#include "../include/main.h"
 int socket_clienteDeKernel;
 int socket_clienteDeMemoria;
 
 int main(int argc, char* argv[]) {
-    
-    iniciar_logger_interfaz();
+
+    iniciar_logger("Kernel", "configs/kernel.log");
 
     char* config_path = argv[1];
 
@@ -12,9 +12,9 @@ int main(int argc, char* argv[]) {
         return EXIT_FAILURE;
 
     log_info(logger, "[INTERFAZ]: Conexion con KERNEL:.");
-    socket_clienteDeKernel = iniciar_cliente_interfaz(interfazConfig.IP_KERNEL, interfazConfig.PUERTO_KERNEL);
+    socket_clienteDeKernel = iniciar_cliente_interfaz(config_io.IP_KERNEL, config_io.PUERTO_KERNEL);
     log_info(logger, "[INTERFAZ]: Conexion con MEMORIA:.");
-    socket_clienteDeMemoria = iniciar_cliente_interfaz(interfazConfig.IP_MEMORIA, interfazConfig.PUERTO_MEMORIA);
+    socket_clienteDeMemoria = iniciar_cliente_interfaz(config_io.IP_MEMORIA, config_io.PUERTO_MEMORIA);
     return EXIT_SUCCESS;
 }
 

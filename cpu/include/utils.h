@@ -8,9 +8,10 @@
 #define ARCHIVO_LOGGER "config/cpu.log"
 #define ARCHIVO_CONFIG "config/cpu.config"
 
-#include "commons.h"
 #include "../../utils/include/server.h"
-#include "utils/include/protocolo.h"
+#include "../../utils/include/protocolo.h"
+#include "../../utils/include/cliente.h"
+#include "../../utils/include/logger.h"
 
 #define SUCCESS 0
 #define FAILURE 1

@@ -5,7 +5,7 @@
 
 int main(int argc, char* argv[]) {
     
-    iniciar_logger_kernel();
+    iniciar_logger("Kernel", "configs/kernel.log");
 
     char* config_path = argv[1];
 

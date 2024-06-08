@@ -33,9 +33,9 @@ typedef enum
     // DESCONEXION = -1,
     MENSAJE,
     // PAQUETE_CPU, // TODO: CHEQUEAR NOMBRE REDEFINIDOS ?
-    // OP_PCB,
+    OP_PCB,
     INSTRUCCION,
-    PAQUETE,
+    OP_PAQUETE,
     // INSTRUCCIONES,
     // CREAR_PROCESO,
     // FINALIZAR_PROCESO,
@@ -61,6 +61,7 @@ typedef struct
     int32_t program_counter;       //DEBE INICIALIZARSE EN 0.
     Registro_CPU registros_cpu;     // Tipo struct REGISTROS_CPU
     int quantum;     //Unidad de tiempo utilizada por el algoritmo de planificación VRR.
+    t_list instructions;
 
 } PCB;  
 typedef struct 
@@ -119,46 +120,16 @@ typedef struct
     BUFFER *buffer;
 } PAQUETE;
 
-typedef struct
-{
-    int32_t PC;
-    int8_t AX;
-    int8_t BX;
-    int8_t CX;
-    int8_t DX;
-    int32_t EAX;
-    int32_t EBX;
-    int32_t ECX;
-
-} Registers;
-
-typedef struct
-{
-    int32_t pid;
-    int32_t programCounter;
-    int32_t quantum;
-    Registers registers;
-    t_list instructions;
-
-} PCB;
-
-typedef struct
-{
-    CODIGO_OPERACION codigo_operacion;
-    BUFFER *buffer;
-} PAQUETE;
-
-typedef struct
-{
-    int size;
-    void *stream;
-} BUFFER;
 
 PAQUETE *crear_paquete(CODIGO_OPERACION codigoOperacion);
 void eliminar_paquete(PAQUETE *paquete);
 void inicializar_buffer(PAQUETE *paquete);
 void agregar_a_paquete(PAQUETE *paquete, void *valor, int tamanio);
 void *serializar_paquete(PAQUETE *paquete, int bytes);
+void enviar_paquete_a_servidor(PAQUETE *paquete, int socketCliente);
+void enviar_paquete_a_cliente(PAQUETE *paquete, int socketCliente);
+PCB *deserializar_pcb(BUFFER *buffer);
+BUFFER* recibir_buffer(int socket);
 
 
 #endif
