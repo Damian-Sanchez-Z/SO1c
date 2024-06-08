@@ -71,53 +71,53 @@ void asignar_a_registro(char *valor, char *registro_instr, PCB *pcb)
 
     if(!strcmp(registro_instr,"AX"))
     {
-        strncpy(reg_cpu->valor_AX, valor, 1);
-        reg_cpu->valor_AX[1] = '\0';
+        strncpy(reg_cpu.AX, valor, 1);
+        reg_cpu.AX[1] = '\0';
     }
     else if(!strcmp(registro_instr,"BX"))
     {
-        strncpy(reg_cpu->valor_BX, valor, 1);
-        reg_cpu->valor_BX[1] = '\0';
+        strncpy(reg_cpu.BX, valor, 1);
+        reg_cpu.BX[1] = '\0';
     }
     else if(!strcmp(registro_instr,"CX"))
     {
-        strncpy(reg_cpu->valor_CX, valor, 1);
-        reg_cpu->valor_CX[1] = '\0';
+        strncpy(reg_cpu.CX, valor, 1);
+        reg_cpu.CX[1] = '\0';
     }
     else if(!strcmp(registro_instr,"DX"))
     {
-        strncpy(reg_cpu->valor_DX, valor, 1);
-        reg_cpu->valor_DX[1] = '\0';
+        strncpy(reg_cpu.DX, valor, 1);
+        reg_cpu.DX[1] = '\0';
     }
     else if(!strcmp(registro_instr,"EAX"))
     {
-        strncpy(reg_cpu->valor_EAX, valor, 4);
-        reg_cpu->valor_EAX[4] = '\0';
+        strncpy(reg_cpu.EAX, valor, 4);
+        reg_cpu.EAX[4] = '\0';
     }
     else if(!strcmp(registro_instr,"EBX"))
     {
-        strncpy(reg_cpu->valor_EBX, valor, 4);
-        reg_cpu->valor_EBX[4] = '\0';
+        strncpy(reg_cpu.EBX, valor, 4);
+        reg_cpu.EBX[4] = '\0';
     }
     else if(!strcmp(registro_instr,"ECX"))
     {
-        strncpy(reg_cpu->valor_ECX, valor, 4);
-        reg_cpu->valor_ECX[4] = '\0';
+        strncpy(reg_cpu.ECX, valor, 4);
+        reg_cpu.ECX[4] = '\0';
     }
     else if(!strcmp(registro_instr,"EDX"))
     {
-        strncpy(reg_cpu->valor_EDX, valor, 4);
-        reg_cpu->valor_EDX[4] = '\0';
+        strncpy(reg_cpu.EDX, valor, 4);
+        reg_cpu.EDX[4] = '\0';
     }
     else if(!strcmp(registro_instr,"SI"))
     {
-        strncpy(reg_cpu->valor_SI, valor, 4);
-        reg_cpu->valor_EDX[4] = '\0';
+        strncpy(reg_cpu.SI, valor, 4);
+        reg_cpu.SI[4] = '\0';
     }
     else if(!strcmp(registro_instr,"DI"))
     {
-        strncpy(reg_cpu->valor_DI, valor, 4);
-        reg_cpu->valor_EDX[4] = '\0';
+        strncpy(reg_cpu.DI, valor, 4);
+        reg_cpu.DI[4] = '\0';
     } 
     else
     {
@@ -132,62 +132,52 @@ char *obtener_valor_registro(Registro_CPU registros_pcb, char *registro_buscado)
 
     if (!strcmp(registro_buscado, "AX"))
     {
-        strncpy(valor, registros_pcb.valor_AX, 1);
+        strncpy(valor, registros_pcb.AX, 1);
         valor[1] = '\0';
     }
     else if (!strcmp(registro_buscado, "BX"))
     {
-        strncpy(valor, registros_pcb.valor_BX, 1);
+        strncpy(valor, registros_pcb.BX, 1);
         valor[1] = '\0';
     }
     else if (!strcmp(registro_buscado, "CX"))
     {
-        strncpy(valor, registros_pcb.valor_CX, 1);
+        strncpy(valor, registros_pcb.CX, 1);
         valor[1] = '\0';
     }
     else if (!strcmp(registro_buscado, "DX"))
     {
-        strncpy(valor, registros_pcb.valor_DX, 4);
+        strncpy(valor, registros_pcb.DX, 4);
         valor[4] = '\0';
     }
     else if (!strcmp(registro_buscado, "EAX"))
     {
-        strncpy(valor, registros_pcb.valor_EAX, 8);
+        strncpy(valor, registros_pcb.EAX, 8);
         valor[8] = '\0';
     }
     else if (!strcmp(registro_buscado, "EBX"))
     {
-        strncpy(valor, registros_pcb.valor_EBX, 8);
+        strncpy(valor, registros_pcb.EBX, 8);
         valor[8] = '\0';
     }
     else if (!strcmp(registro_buscado, "ECX"))
     {
-        strncpy(valor, registros_pcb.valor_ECX, 8);
+        strncpy(valor, registros_pcb.ECX, 8);
         valor[8] = '\0';
     }
     else if (!strcmp(registro_buscado, "EDX"))
     {
-        strncpy(valor, registros_pcb.valor_EDX, 8);
+        strncpy(valor, registros_pcb.EDX, 8);
         valor[8] = '\0';
     }
-    else if (!strcmp(registro_buscado, "RAX"))
+    else if (!strcmp(registro_buscado, "SI"))
     {
-        strncpy(valor, registros_pcb.valor_RAX, 16);
+        strncpy(valor, registros_pcb->SI, 8);
         valor[16] = '\0';
     }
-    else if (!strcmp(registro_buscado, "RBX"))
+    else if (!strcmp(registro_buscado, "DI"))
     {
-        strncpy(valor, registros_pcb.valor_RBX, 16);
-        valor[16] = '\0';
-    }
-    else if (!strcmp(registro_buscado, "RCX"))
-    {
-        strncpy(valor, registros_pcb.valor_RCX, 16);
-        valor[16] = '\0';
-    }
-    else if (!strcmp(registro_buscado, "RDX"))
-    {
-        strncpy(valor, registros_pcb.valor_RDX, 16);
+        strncpy(valor, registros_pcb->DI, 8);
         valor[16] = '\0';
     }
     else
