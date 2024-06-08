@@ -28,3 +28,29 @@ PAQUETE *crear_paquete(CODIGO_OPERACION codigoOperacion)
   return paquete;
 }
 
+void eliminar_paquete(PAQUETE *paquete)
+{
+  if (paquete != NULL)
+  {
+    if (paquete->buffer != NULL)
+    {
+      free(paquete->buffer->stream);
+      free(paquete->buffer);
+    }
+    free(paquete);
+  }
+}
+
+void enviar_paquete_a_cliente(PAQUETE *paquete, int socketCliente)
+{
+  enviar_paquete_a_servidor(paquete, socketCliente);
+}
+
+void enviar_paquete_a_servidor(PAQUETE *paquete, int socketCliente)
+{
+  int bytes = paquete->buffer->size + 2 * sizeof(int);
+  void *aEnviar = serializar_paquete(paquete, bytes);
+
+  send(socketCliente, aEnviar, bytes, 0);
+  free(aEnviar);
+}

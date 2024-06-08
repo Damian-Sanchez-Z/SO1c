@@ -132,6 +132,80 @@ void asignar_a_registro(char *valor, char *registro_instr, PCB *pcb)
     }
 }
 
+char *obtener_valor_registro(Registro_CPU registros_pcb, char *registro_buscado)
+{
+    char *valor = malloc(17); // solo lo inicializo, se tiene q pisar
+    //quitar_salto_de_linea(registro_buscado);
+
+    if (!strcmp(registro_buscado, "AX"))
+    {
+        strncpy(valor, registros_pcb.valor_AX, 1);
+        valor[1] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "BX"))
+    {
+        strncpy(valor, registros_pcb.valor_BX, 1);
+        valor[1] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "CX"))
+    {
+        strncpy(valor, registros_pcb.valor_CX, 1);
+        valor[1] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "DX"))
+    {
+        strncpy(valor, registros_pcb.valor_DX, 4);
+        valor[4] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "EAX"))
+    {
+        strncpy(valor, registros_pcb.valor_EAX, 8);
+        valor[8] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "EBX"))
+    {
+        strncpy(valor, registros_pcb.valor_EBX, 8);
+        valor[8] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "ECX"))
+    {
+        strncpy(valor, registros_pcb.valor_ECX, 8);
+        valor[8] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "EDX"))
+    {
+        strncpy(valor, registros_pcb.valor_EDX, 8);
+        valor[8] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "RAX"))
+    {
+        strncpy(valor, registros_pcb.valor_RAX, 16);
+        valor[16] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "RBX"))
+    {
+        strncpy(valor, registros_pcb.valor_RBX, 16);
+        valor[16] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "RCX"))
+    {
+        strncpy(valor, registros_pcb.valor_RCX, 16);
+        valor[16] = '\0';
+    }
+    else if (!strcmp(registro_buscado, "RDX"))
+    {
+        strncpy(valor, registros_pcb.valor_RDX, 16);
+        valor[16] = '\0';
+    }
+    else
+    {
+        log_error(logger, "CPU: ERROR AL BUSCAR REGISTRO, NOMBRE DESCONOCIDO");
+        free(valor); // Liberar la memoria asignada
+        return NULL;
+    }
+    return valor;
+}
+
 int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb) // EXECUTE //CADA INSTRUCCIÓN DEBE TENER SU log_warning(PID: <PID> - Ejecutando: <INSTRUCCION> - <PARAMETROS>)
 {
 
@@ -240,3 +314,92 @@ int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb) // EXECUTE //CADA I
     }
 }
 
+void ejecutar_set(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb) 
+{
+    log_warning(logger, "CPU: PID: <%d> - Ejecutando: <SET> - <REGISTRO:%s , VALOR: %s>",
+                pcb->PID,
+                instruccion->registro,
+                instruccion->valor);
+    asignar_a_registro(instruccion->valor, instruccion->registro, pcb);
+    eliminar_paquete(paquete);
+}
+
+//Suma al Registro Destino el Registro Origen y deja el resultado en el Registro Destino.
+
+void ejecutar_SUM(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb) 
+{
+    log_warning(logger, "CPU: PID: <%d> - Ejecutando: <SUM> - <REGISTRO_DESTINO:%s , REGISTRO_ORIGEN: %s>",
+                pcb->PID,
+                instruccion->registro_destino,
+                instruccion->registro_origen);
+
+    char *valor_registro_origen = obtener_valor_registro(pcb->registros_cpu,instruccion->registro_origen);
+    char *valor_registro_destino = obtener_valor_registro(pcb->registros_cpu,instruccion->registro_destino);
+    char *resultado = valor_registro_destino + valor_registro_origen;
+    
+    asignar_a_registro(resultado, instruccion->registro_destino, pcb);
+    eliminar_paquete(paquete);
+}
+
+//Resta al Registro Destino el Registro Origen y deja el resultado en el Registro Destino.
+
+void ejecutar_SUB(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb) 
+{
+    log_warning(logger, "CPU: PID: <%d> - Ejecutando: <SUB> - <REGISTRO_DESTINO:%s , REGISTRO_ORIGEN: %s>",
+                pcb->PID,
+                instruccion->registro_destino,
+                instruccion->registro_origen);
+
+    char *valor_registro_origen = obtener_valor_registro(pcb->registros_cpu,instruccion->registro_origen);
+    char *valor_registro_destino = obtener_valor_registro(pcb->registros_cpu,instruccion->registro_destino);
+    char *resultado = valor_registro_destino - valor_registro_origen;
+        
+    asignar_a_registro(resultado, instruccion->registro_destino, pcb);
+    eliminar_paquete(paquete);
+}
+
+//Si el valor del registro es distinto de cero, actualiza el program counter al número de instrucción pasada por parámetro.
+void ejecutar_jnz(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb) 
+{
+    log_warning(logger, "CPU: PID: <%d> - Ejecutando: <JNZ> - <REGISTRO:%s>",
+                pcb->PID,
+                instruccion->registro);
+
+    char *valor_registro = obtener_valor_registro(pcb->registros_cpu, instruccion->registro);
+
+    if(!valor_registro == 0){
+        cambiarValorProgramCounter(valor_registro, pcb);
+        log_info(logger,"CAMBIANDO EL VALOR DEL PC...");
+        log_info(logger, "EL VALOR DEL PC ES: <%d>",
+                 pcb->program_counter);
+    }
+
+    eliminar_paquete(paquete);
+}
+
+//Esta instrucción solicita al Kernel que se envíe a una interfaz de I/O a que realice un sleep por una cantidad de unidades de trabajo.
+//ESTA INSTRUCCION DEBERIA DE ATENDERLA KERNEL
+void ejecutar_io_gen_sleep(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb) 
+{
+    log_warning(logger, "CPU: PID: <%d> - Ejecutando: <IO_GEN_SLEEP> - <INTERFACE:%s , UNIDADES_DE_TRABAJO: %d>",
+                pcb->PID,
+                instruccion->IO_Interface.nombre,
+                instruccion->unidades_de_trabajo);
+
+    PAQUETE *paquete_kernel = crear_paquete(PAQUETE_CPU);
+    agregar_a_paquete(paquete_kernel, &pcb->PID, sizeof(int32_t));
+    agregar_a_paquete(paquete_kernel, &pcb->program_counter, sizeof(int32_t));
+    agregar_a_paquete(paquete_kernel, &pcb->registros_cpu, sizeof(Registro_CPU));
+    agregar_a_paquete(paquete_kernel, &instruccion->IO_Interface.id,sizeof(int32_t));
+    agregar_a_paquete(paquete_kernel, &instruccion->unidades_de_trabajo,sizeof(int32_t))
+
+    enviar_paquete_a_cliente(paquete_kernel, socket_kernel);
+    eliminar_paquete(paquete_kernel);
+    eliminar_paquete(paquete);
+}
+
+//hay que probar esto, no creo que funcione
+void cambiarValorProgramCounter(char *valor, PCB *pcb){
+    strncpy(pcb->program_counter,valor,4);
+    pcb->program_counter[4] = '\0';
+}

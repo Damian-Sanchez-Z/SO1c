@@ -24,6 +24,10 @@ typedef t_list Lista;
 BUFFER* recibir_buffer(int socket);
 PCB* deserializar_pcb(BUFFER *buffer);
 PAQUETE *crear_paquete(CODIGO_OPERACION codigoOperacion);
+void eliminar_paquete(PAQUETE *paquete);
+void enviar_paquete_a_cliente(PAQUETE *paquete, int socketCliente);
+void enviar_paquete_a_servidor(PAQUETE *paquete, int socketCliente);
+
 
 
 
@@ -82,6 +86,12 @@ typedef struct
     char* nombreInstruccion;
     char* valor; // TODO: Chequear. SET AX HOLA
     char* registro; //Recibe nombr de registro, comparo y asigno al registro del PCB
+    char* registro_origen;
+    char* registro_destino;
+    char* numeroDeInstruccion;
+    IO_Interface IO_Interface;
+    int32_t unidades_de_trabajo;
+    //--------------//
     int32_t direccionLogica;
     int32_t direccionFisica;
     int32_t tiempo;
@@ -110,5 +120,11 @@ typedef struct
     CODIGO_OPERACION codigo_operacion;
     BUFFER *buffer;
 } PAQUETE;
+
+
+//MOMENTANEAMENTE
+typedef struct {
+    int32_t id;             
+    const char *nombre;  
 
 #endif
