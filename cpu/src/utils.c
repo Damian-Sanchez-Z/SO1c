@@ -203,12 +203,12 @@ int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb) // EXECUTE //CADA I
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "MOV_IN")) //Listo
     {
-        ejecutar_mov_in(paquete, Instruccion, pcb);
+        //ejecutar_mov_in(paquete, Instruccion, pcb);
         return 1;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "MOV_OUT")) //Listo
     {
-        ejecutar_mov_out(paquete, Instruccion, pcb);
+        //ejecutar_mov_out(paquete, Instruccion, pcb);
         return 1;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "SUM")) //TODO
@@ -228,12 +228,12 @@ int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb) // EXECUTE //CADA I
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "RESIZE"))
     {
-        ejecutar_resize();
+        //ejecutar_resize();
         return 0;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "COPY_STRING"))
     {
-        ejecutar_copy_string();
+        //ejecutar_copy_string();
         return 0;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_GEN_SLEEP")) //TODO
@@ -242,11 +242,11 @@ int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb) // EXECUTE //CADA I
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_STDIN_READ"))
     {
-        ejecutar_io_stdin_read();
+        //ejecutar_io_stdin_read();
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_STDOUT_WRITE"))
     {
-        ejecutar_io_stdout_write();
+        //ejecutar_io_stdout_write();
         return 0;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "WAIT")) //Listo
@@ -261,27 +261,27 @@ int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb) // EXECUTE //CADA I
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_FS_CREATE")) 
     {
-        ejecutar_io_fs_create();
+        //ejecutar_io_fs_create();
         return 0;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_FS_DELETE")) 
     {
-        ejecutar_io_fs_delete();
+        //ejecutar_io_fs_delete();
         return 0;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_FS_TRUNCATE"))
     {
-        ejecutar_io_fs_truncate();
+        //ejecutar_io_fs_truncate();
         return 0;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_FS_WRITE"))
     {
-        ejecutar_io_fs_write();
+        //ejecutar_io_fs_write();
         return 0;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_FS_READ"))
     {
-        ejecutar_io_fs_read();
+        //ejecutar_io_fs_read();
         return 0;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "EXIT"))
