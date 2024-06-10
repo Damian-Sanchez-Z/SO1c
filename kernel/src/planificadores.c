@@ -7,10 +7,14 @@ t_list exit_state;
 
 int64_t PID;
 
+kernel_config KernelConfig;
+int socket_cpu;
+
+
 PCB* enviarACPU(PCB* pcb){
     PAQUETE * paquete_pcb = crear_paquete(OP_PCB);
 
-    paquete_pcb->buffer = serializar_pcb(pcb);
+    //paquete_pcb->buffer = serializar_pcb(pcb);
 
     Instruccion* instruccion_enviar = list_get(&pcb->instructions, pcb->program_counter);
 
@@ -87,6 +91,6 @@ PCB* CrearPcb(){
     pcb->registros_cpu.EBX = 0;
     pcb->registros_cpu.ECX = 0;
     pcb->registros_cpu.EDX = 0;
-    pcb->registros_cpu->SI = 0;
-    pcb->registros_cpu->DI = 0;
+    pcb->registros_cpu.SI = 0;
+    pcb->registros_cpu.DI = 0;
 }

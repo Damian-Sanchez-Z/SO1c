@@ -21,25 +21,22 @@
 
 typedef struct kernel_config
 {
-    char *IP;
-    char *PUERTO_ESCUCHA;
-    char *IP_CPU;
-    char *PUERTO_CPU;
+    char * PUERTO_ESCUCHA;
     char *IP_MEMORIA;
     char *PUERTO_MEMORIA;
-    char *IP_FILESYSTEM;
-    char *PUERTO_FILESYSTEM;
+    char *IP_CPU;
+    char * PUERTO_CPU_DISPATCH;
+    char * PUERTO_CPU_INTERRUPT;
     char *ALGORITMO_PLANIFICACION;
-    char *ESTIMACION_INICIAL;
-    char *HRRN_ALFA;
-    char *GRADO_MAX_MULTIPROGRAMACION;
+    int32_t QUANTUM;
     char **RECURSOS;
     char **INSTANCIAS_RECURSOS;
-    int32_t QUANTUM;
+    char *GRADO_MULTIPROGRAMACION;
 } kernel_config;
 
 extern kernel_config KernelConfig;
 extern int socket_cpu;
+extern t_log* logger;
 
 int iniciar_config_kernel(char*);
 int iniciar_servidor_kernel();

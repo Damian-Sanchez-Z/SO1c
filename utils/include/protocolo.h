@@ -24,10 +24,6 @@ typedef pthread_t Hilo;
 
 extern t_log* logger;
 
-BUFFER* recibir_buffer(int socket);
-PCB* deserializar_pcb(BUFFER *buffer);
-PAQUETE *crear_paquete(CODIGO_OPERACION codigoOperacion);
-
 typedef enum
 {
     // DESCONEXION = -1,
@@ -55,15 +51,7 @@ typedef enum
     // WRITE,
     
 } CODIGO_OPERACION;
-typedef struct
-{
-    int32_t PID;
-    int32_t program_counter;       //DEBE INICIALIZARSE EN 0.
-    Registro_CPU registros_cpu;     // Tipo struct REGISTROS_CPU
-    int quantum;     //Unidad de tiempo utilizada por el algoritmo de planificación VRR.
-    t_list instructions;
 
-} PCB;  
 typedef struct 
 {
     uint32_t PC;    // Progam Counter
@@ -80,6 +68,17 @@ typedef struct
 
 } Registro_CPU;
 
+
+typedef struct
+{
+    int32_t PID;
+    int32_t program_counter;       //DEBE INICIALIZARSE EN 0.
+    Registro_CPU registros_cpu;     // Tipo struct REGISTROS_CPU
+    int quantum;     //Unidad de tiempo utilizada por el algoritmo de planificación VRR.
+    t_list instructions;
+
+} PCB;
+
 typedef struct 
 {
     char* nombreInstruccion;
@@ -88,7 +87,7 @@ typedef struct
     char* registro_origen;
     char* registro_destino;
     char* numeroDeInstruccion;
-    IO_Interface IO_Interface;
+    //IO_Interface IO_Interface;
     int32_t unidades_de_trabajo;
     //--------------//
     int32_t direccionLogica;
@@ -119,7 +118,6 @@ typedef struct
     CODIGO_OPERACION codigo_operacion;
     BUFFER *buffer;
 } PAQUETE;
-
 
 PAQUETE *crear_paquete(CODIGO_OPERACION codigoOperacion);
 void eliminar_paquete(PAQUETE *paquete);

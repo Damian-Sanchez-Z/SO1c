@@ -12,30 +12,31 @@ int iniciar_config_kernel(char* path)
         return FAILURE;
     }
 
-    KernelConfig.IP = config_get_string_value(config, "IP");
     KernelConfig.PUERTO_ESCUCHA = config_get_string_value(config, "PUERTO_ESCUCHA");
-    KernelConfig.IP_CPU = config_get_string_value(config, "IP_CPU");
-    KernelConfig.PUERTO_CPU = config_get_string_value(config, "PUERTO_CPU");
+
     KernelConfig.IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
     KernelConfig.PUERTO_MEMORIA = config_get_string_value(config, "PUERTO_MEMORIA");
-    KernelConfig.IP_FILESYSTEM = config_get_string_value(config, "IP_FILESYSTEM");
-    KernelConfig.PUERTO_FILESYSTEM = config_get_string_value(config, "PUERTO_FILESYSTEM");
+
+    KernelConfig.IP_CPU = config_get_string_value(config, "IP_CPU");
+    KernelConfig.PUERTO_CPU_DISPATCH = config_get_string_value(config, "PUERTO_CPU_DISPATCH");
+    KernelConfig.PUERTO_CPU_INTERRUPT = config_get_string_value(config, "PUERTO_CPU_INTERRUPT");
+
     KernelConfig.ALGORITMO_PLANIFICACION = config_get_string_value(config, "ALGORITMO_PLANIFICACION");
-    KernelConfig.ESTIMACION_INICIAL = config_get_string_value(config,"ESTIMACION_INICIAL");
-    KernelConfig.HRRN_ALFA = config_get_string_value(config, "HRRN_ALFA");
-    KernelConfig.GRADO_MAX_MULTIPROGRAMACION = config_get_string_value(config, "GRADO_MAX_MULTIPROGRAMACION");
+
+    KernelConfig.QUANTUM = config_get_int_value(config, "QUANTUM");
+
+    KernelConfig.GRADO_MULTIPROGRAMACION = config_get_string_value(config, "GRADO_MULTIPROGRAMACION");
     KernelConfig.RECURSOS = config_get_array_value(config, "RECURSOS");
     KernelConfig.INSTANCIAS_RECURSOS = config_get_array_value(config, "INSTANCIAS_RECURSOS");
-    KernelConfig.QUANTUM = config_get_int_value(config, "QUANTUM");
 
     log_info(logger, "[KERNEL]: Archivo Config creado y rellenado correctamente");
     return SUCCESS;
 }
 
-int iniciar_servidor_kernel()
+int iniciar_servidor_kernel(char* ip)
 {
     log_info(logger, "[KERNEL]: Iniciando Servidor ...");
-    socket_kernel = iniciar_servidor(KernelConfig.IP, KernelConfig.PUERTO_ESCUCHA);
+    socket_kernel = iniciar_servidor(ip, KernelConfig.PUERTO_ESCUCHA);
 
     if (socket_kernel < 0)
     {
