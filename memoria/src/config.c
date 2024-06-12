@@ -23,14 +23,14 @@ void iniciar_config_memoria(char* config_path)
 int iniciar_servidor_memoria()
 {
     log_info(logger, "[MEMORIA]: Iniciando Servidor");
-    socket_memoria = iniciar_servidor(ip, string_itoa(config.puerto));
 
-    if (socket_memoria < 0)
+    int socket = iniciar_servidor(string_itoa(config.puerto));
+	
+    if (socket < 0)
     {
         log_error(logger, "[MEMORIA]: Error intentando iniciar Servidor.");
-        return FAILURE;
     }
 
-    log_info(logger, "[MEMORIA]: Servidor iniciados correctamente.");
-    return SUCCESS;
+    log_info(logger, "[MEMORIA]: Servidor iniciado correctamente.");
+	return socket;
 }
