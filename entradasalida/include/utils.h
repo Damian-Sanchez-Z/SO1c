@@ -21,26 +21,33 @@
 #define ARCHIVO_CONFIG "../interfaz.config"
 #define SUCCESS 0
 #define FAILURE -1
-
-t_config* config;
-
+typedef enum{
+    GENERICA,
+    STDIN,
+    STDOUT,
+    DIALFS
+}TIPO_INTERFAZ;
 typedef struct interfaz_config{
     char *TIPO_INTERFAZ;
-    int *TIEMPO_UNIDAD_TRABAJO;
+    int TIEMPO_UNIDAD_TRABAJO;
     char *IP_KERNEL;
-    int *PUERTO_KERNEL;
+    int PUERTO_KERNEL;
     char *IP_MEMORIA;
-    int *PUERTO_MEMORIA;
+    int PUERTO_MEMORIA;
     char *PATH_BASE_DIALFS;
-    int *BLOCK_SIZE;
-    int *BLOCK_COUNT;
-    int *RETRASO_COMPACTACION;
-} interfaz_config;
+    int BLOCK_SIZE;
+    int BLOCK_COUNT;
+    int RETRASO_COMPACTACION;
+}interfaz_config;
 
-extern interfaz_config config_io;
+extern t_log* logger;
+extern char* nombre; //uen seccionde solo lectura y en inciar cliente interfaz no tiene definida la referencia
+extern interfaz_config configuracion; 
+extern TIPO_INTERFAZ tipo_interfaz; 
 
 void iniciar_logger_interfaz();
-int iniciar_config_interfaz(char*);
-int iniciar_cliente_interfaz(char* ip, char* puerto);
+int iniciar_config_interfaz(char* path);
+int iniciar_cliente_interfaz(char* ip, int puerto, char* servidor);
+TIPO_INTERFAZ enum_interfaz(char* tipo);
 
 #endif

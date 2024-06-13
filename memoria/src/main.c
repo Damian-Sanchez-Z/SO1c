@@ -2,34 +2,30 @@
 
 int main(int argc, char* argv[]) {
 
-    iniciar_logger("Memoria", "configs/memoria.log");
+    logger = iniciar_logger_memoria();
 
     char* config_path = argv[1];
 
     iniciar_config_memoria(config_path);
 
-    int socket_memoria = iniciar_servidor_memoria();
-
-    //crear_hilo_operaciones(config.path_instrucciones);
-
-     while(1){
-        int *conexion = malloc(sizeof(int));
-        *conexion = esperar_cliente(socket_memoria);
-        if(*conexion>0){
-            pthread_t unHilo;
-            pthread_create(&unHilo, NULL, atender_cliente, (void*)conexion);
-            pthread_detach(unHilo);
-        }else{
-            free(conexion);
-        }
+    socket_memoria = iniciar_servidor_memoria();
+    while(1){
+        //pthread_t unHilo;
+        int *socket_cliente = malloc(sizeof(int));
+        *socket_cliente = esperar_cliente(socket_memoria);
+        printf("Cliente: %i", *socket_cliente);
+        //pthread_create(&unHilo, NULL, atender_cliente, socket_cliente);
+        //pthread_detach(unHilo);
     }
     close(socket_memoria);
     return EXIT_SUCCESS;
 }
-void* atender_cliente(void *unCliente){
-    int* cliente =  unCliente;
-    int confirmacion = handshake_con_cliente(*cliente);
-    free(cliente);
-    close(*cliente);
-    return NULL;
-}
+/////// atender cliente
+
+//void *atender_cliente(void *args){
+  //  printf("hilo creado para cliente");
+   // int *cliente = args;
+   // enviar_mensaje_a_cliente("Holis", *cliente);
+   // char* mensaje;
+   // recibir_mensaje(*cliente, mensaje);
+//}

@@ -1,11 +1,11 @@
 #include "../include/config.h"
-
+MEM_CONFIG config;
 void iniciar_config_memoria(char* config_path)
 {
-	config_raw = config_create(config_path);
+	t_config *config_raw = config_create(config_path);
 
 	if(config_raw == NULL){
-		perror("[MEMORIA]: ERROR AL INICIAR CONFIG INICIAL");
+		log_error(logger, "Error al iniciar configuracion.");
 		exit(EXIT_FAILURE);
 	}
 
@@ -15,22 +15,23 @@ void iniciar_config_memoria(char* config_path)
 	config.tamanio_memoria = config_get_int_value(config_raw, "TAM_MEMORIA");
 	config.tamanio_pagina = config_get_int_value(config_raw, "TAM_PAGINA");
 	config.path_instrucciones = config_get_string_value(config_raw, "PATH_INSTRUCCIONES");
-	config.retardo_memoria = config_get_int_value(config_raw, "RETARDO_MEMORIA");
+	config.retardo_respuesta = config_get_int_value(config_raw, "RETARDO_RESPUESTA");
 
-	log_info(logger, "[MEMORIA]: Archivo Config creado y rellenado correctamente");
+	log_info(logger, "[MEMORIA]: Configuracion inicial exitosa.");
 }
 
 int iniciar_servidor_memoria()
 {
     log_info(logger, "[MEMORIA]: Iniciando Servidor");
+    int socket_memoria = iniciar_servidor(string_itoa(config.puerto));
 
-    int socket = iniciar_servidor(string_itoa(config.puerto));
-	
-    if (socket < 0)
+    if (socket_memoria < 0)
     {
         log_error(logger, "[MEMORIA]: Error intentando iniciar Servidor.");
+        return EXIT_FAILURE;
     }
 
     log_info(logger, "[MEMORIA]: Servidor iniciado correctamente.");
-	return socket;
+    return socket_memoria;
 }
+

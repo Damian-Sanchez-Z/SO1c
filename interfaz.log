@@ -1,0 +1,12 @@
+[INFO] 05:48:03:940 Mai/(18330:18330): [Mai]: Logger creado correctamente.
+[INFO] 05:48:04:070 Mai/(18330:18330): [Mai]: Archivo Config creado y rellenado correctamente.
+[INFO] 05:48:04:081 Mai/(18330:18330): [Mai]: Iniciando conexion con KERNEL
+[ERROR] 05:48:04:102 Mai/(18330:18330): [Mai]: Error de conexion con KERNEL .
+[INFO] 05:48:04:114 Mai/(18330:18330): [Mai]: Iniciando conexion con MEMORIA
+[ERROR] 05:48:04:124 Mai/(18330:18330): [Mai]: Error de conexion con MEMORIA .
+[INFO] 05:49:29:498 Mai/(18839:18839): [Mai]: Logger creado correctamente.
+[INFO] 05:49:29:598 Mai/(18839:18839): [Mai]: Archivo Config creado y rellenado correctamente.
+[INFO] 05:49:29:640 Mai/(18839:18839): [Mai]: Iniciando conexion con KERNEL
+[ERROR] 05:49:29:658 Mai/(18839:18839): [Mai]: Error de conexion con KERNEL .
+[INFO] 05:49:29:671 Mai/(18839:18839): [Mai]: Iniciando conexion con MEMORIA
+[INFO] 05:49:29:714 Mai/(18839:18839): [Mai]: Conexion con MEMORIA exitosa.

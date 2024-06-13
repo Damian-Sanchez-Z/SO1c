@@ -1,22 +1,22 @@
 #include "../include/utils.h"
 
-void iniciar_logger_interfaz(char* nombre_interfaz){
-    logger = log_create(ARCHIVO_LOGGER, nombre_interfaz, 1, LOG_LEVEL_INFO);
-    log_info(logger, "[%s]: Logger creado correctamente.", nombre_interfaz);
+void iniciar_logger_interfaz(){
+    logger = log_create(ARCHIVO_LOGGER, nombre, 1, LOG_LEVEL_INFO);
+    log_info(logger, "[%s]: Logger creado correctamente.", nombre);
 }
 
-int iniciar_config_interfaz(char* path, char* nombre_interfaz){
+int iniciar_config_interfaz(char* path){
     t_config* config = config_create(path);
     if(config == NULL)
     {
-        log_error(logger,"[%s]: Error al iniciar la configuracion", nombre_interfaz);
+        log_error(logger,"[%s]: Error al iniciar la configuracion", nombre);
         return FAILURE;
     }
     configuracion.TIPO_INTERFAZ = config_get_string_value(config, "TIPO_INTERFAZ");
     configuracion.IP_KERNEL = config_get_string_value(config, "IP_KERNEL");
     configuracion.PUERTO_KERNEL = config_get_int_value(config, "PUERTO_KERNEL");
 
-    tipo_interfaz = enum_interfaz(configuracion.TIPO_INTERFAZ);
+   tipo_interfaz = enum_interfaz(configuracion.TIPO_INTERFAZ);
 
     switch (tipo_interfaz)
     {
@@ -43,23 +43,23 @@ int iniciar_config_interfaz(char* path, char* nombre_interfaz){
         break;
     }
     
-    log_info(logger, "[%s]: Archivo Config creado y rellenado correctamente.", nombre_interfaz);
+    log_info(logger, "[%s]: Archivo Config creado y rellenado correctamente.", nombre);
     return SUCCESS;
 }
 
-int iniciar_cliente_interfaz(char* ipServidor, int puertoServidor, char* servidor, char* nombre_interfaz)
+int iniciar_cliente_interfaz(char* ipServidor, int puertoServidor, char* servidor)
 {
     char* puerto = string_itoa(puertoServidor);
-    log_info(logger, "[%s]: Iniciando conexion con %s",nombre_interfaz, servidor);
+    log_info(logger, "[%s]: Iniciando conexion con %s",nombre, servidor);
     int socket_interfaz = crear_conexion_con_servidor(ipServidor, puerto);
 
     if (socket_interfaz < 0)
     {
-        log_error(logger, "[%s]: Error de conexion con %s .", nombre_interfaz, servidor);
+        log_error(logger, "[%s]: Error de conexion con %s .", nombre, servidor);
         return FAILURE;
     }
 
-    log_info(logger, "[%s]: Conexion con %s exitosa.", nombre_interfaz, servidor);
+    log_info(logger, "[%s]: Conexion con %s exitosa.", nombre, servidor);
     return socket_interfaz;
 }
 TIPO_INTERFAZ enum_interfaz(char* tipo){
