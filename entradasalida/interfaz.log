@@ -1,0 +1,18 @@
+[INFO] 23:24:07:508 SHELL=/bin/bash/(36880:36880): [SHELL=/bin/bash]: Logger creado correctamente.
+[ERROR] 23:24:07:508 SHELL=/bin/bash/(36880:36880): [SHELL=/bin/bash]: Error al iniciar la configuracion
+[INFO] 23:24:31:802 SHELL=/bin/bash/(37055:37055): [SHELL=/bin/bash]: Logger creado correctamente.
+[ERROR] 23:24:31:802 SHELL=/bin/bash/(37055:37055): [SHELL=/bin/bash]: Error al iniciar la configuracion
+[INFO] 23:25:11:538 SHELL=/bin/bash/(37107:37107): [SHELL=/bin/bash]: Logger creado correctamente.
+[INFO] 23:26:02:716 Mai/(37180:37180): [Mai]: Logger creado correctamente.
+[ERROR] 23:26:02:716 Mai/(37180:37180): [Mai]: Error al iniciar la configuracion
+[INFO] 23:26:21:802 Mai/(37226:37226): [Mai]: Logger creado correctamente.
+[INFO] 23:27:04:702 Mai/(37281:37281): [Mai]: Logger creado correctamente.
+[INFO] 23:27:13:264 Mai/(37281:37281): [Mai]: Archivo Config creado y rellenado correctamente.
+[INFO] 23:27:13:264 Mai/(37281:37281): [Mai]: Iniciando conexion con KERNEL
+[INFO] 23:30:33:610 Mai/(37523:37523): [Mai]: Logger creado correctamente.
+[INFO] 23:30:41:416 Mai/(37523:37523): [Mai]: Archivo Config creado y rellenado correctamente.
+[INFO] 23:31:04:251 Mai/(37523:37523): [Mai]: Iniciando conexion con KERNEL
+[INFO] 23:32:29:887 Mai/(37655:37655): [Mai]: Logger creado correctamente.
+[INFO] 23:32:29:887 Mai/(37655:37655): [Mai]: Archivo Config creado y rellenado correctamente.
+[INFO] 23:35:16:907 Mai/(37811:37811): [Mai]: Logger creado correctamente.
+[INFO] 23:35:16:907 Mai/(37811:37811): [Mai]: Archivo Config creado y rellenado correctamente.
