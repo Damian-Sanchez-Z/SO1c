@@ -1,6 +1,6 @@
 #include "../include/server.h"
 
-int iniciar_servidor(char* puerto)
+int iniciar_servidor(char *puerto)
 {
   int socketServidor;
 
