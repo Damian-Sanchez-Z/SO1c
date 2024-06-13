@@ -2,8 +2,15 @@
 
 CPU_CONFIG CPUConfig;
 
-void cargar_configuracion_cpu(Config *config)
-{
+int iniciar_config_cpu(char* path){
+
+    t_config* config = config_create(path);
+    if(config == NULL)
+    {
+        log_error(logger,"[KERNEL]: ERROR AL INICIAR CONFIG INICIAL");
+        return FAILURE;
+    }
+
     CPUConfig.IP_MEMORIA = config_get_string_value(config, "IP_MEMORIA");
     CPUConfig.PUERTO_MEMORIA = config_get_int_value(config, "PUERTO_MEMORIA");
     CPUConfig.PUERTO_ESCUCHA_DISPATCH = config_get_int_value(config, "PUERTO_ESCUCHA_DISPATCH");

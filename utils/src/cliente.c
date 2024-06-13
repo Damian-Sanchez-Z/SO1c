@@ -9,7 +9,6 @@ int crear_conexion_con_servidor(char *ip, char *puerto)
   memset(&hints, 0, sizeof(hints));
   hints.ai_family = AF_UNSPEC;
   hints.ai_socktype = SOCK_STREAM;
-  hints.ai_flags = AI_PASSIVE;
 
   getaddrinfo(ip, puerto, &hints, &servinfo);
 

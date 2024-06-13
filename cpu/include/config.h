@@ -2,7 +2,7 @@
 #ifndef CPU_CONFIG_H
 #define CPU_CONFIG_H
 
-#include "commons.h"
+#include "utils.h"
 
 typedef struct CPU_CONFIG
 {
@@ -16,6 +16,7 @@ typedef struct CPU_CONFIG
 
 extern CPU_CONFIG CPUConfig;
 
-void cargar_configuracion_cpu(Config *config);
+int iniciar_config_cpu(char* path);
+
 
 #endif
