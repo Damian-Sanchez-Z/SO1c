@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 
     log_info(logger, "A3");
 
-    iniciar_servidor_kernel(argv[2]);
+    iniciar_servidor_kernel();
 
     log_info(logger, "A4");
 

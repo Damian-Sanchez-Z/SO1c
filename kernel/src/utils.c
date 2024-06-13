@@ -33,10 +33,10 @@ int iniciar_config_kernel(char* path)
     return SUCCESS;
 }
 
-int iniciar_servidor_kernel(char* ip)
+int iniciar_servidor_kernel()
 {
     log_info(logger, "[KERNEL]: Iniciando Servidor ...");
-    socket_kernel = iniciar_servidor(ip, KernelConfig.PUERTO_ESCUCHA);
+    socket_kernel = iniciar_servidor(KernelConfig.PUERTO_ESCUCHA);
 
     if (socket_kernel < 0)
     {
