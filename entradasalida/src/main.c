@@ -18,6 +18,9 @@ int main(int argc, char* argv[]) {
             //int confirmacion_kernel = handshake_con_servidor(conexion_con_kernel);
             //int confirmacion_memoria = handshake_con_servidor(conexion_con_memoria);
     }
+    liberar_conexion_con_servidor(conexion_con_kernel);
+    liberar_conexion_con_servidor(conexion_con_memoria);
+    log_destroy(logger);
     return EXIT_SUCCESS;
 }
 
