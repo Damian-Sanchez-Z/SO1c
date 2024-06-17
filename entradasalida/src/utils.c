@@ -44,7 +44,6 @@ int iniciar_config_interfaz(char* path){
     }
     
     log_info(logger, "[%s]: Archivo Config creado y rellenado correctamente.", nombre);
-    config_destroy(config);
     return SUCCESS;
 }
 

@@ -46,3 +46,13 @@
 [INFO] 08:15:30:641 MEMORIA/(25143:25143): [MEMORIA]: Iniciando Servidor
 [INFO] 08:15:30:897 MEMORIA/(25143:25143): [MEMORIA]: Servidor iniciado correctamente.
 [INFO] 08:15:40:861 MEMORIA/(25143:25143): Cliente: 5
+[INFO] 22:15:32:724 MEMORIA/(3274:3274): [MEMORIA]: Logger creado correctamente
+[INFO] 22:15:32:873 MEMORIA/(3274:3274): [MEMORIA]: Configuracion inicial exitosa.
+[INFO] 22:15:32:896 MEMORIA/(3274:3274): [MEMORIA]: Iniciando Servidor
+[INFO] 22:15:32:983 MEMORIA/(3274:3274): [MEMORIA]: Servidor iniciado correctamente.
+[INFO] 22:15:40:820 MEMORIA/(3274:3274): Cliente: 5
+[INFO] 22:16:06:314 MEMORIA/(3503:3503): [MEMORIA]: Logger creado correctamente
+[INFO] 22:16:06:445 MEMORIA/(3503:3503): [MEMORIA]: Configuracion inicial exitosa.
+[INFO] 22:16:06:464 MEMORIA/(3503:3503): [MEMORIA]: Iniciando Servidor
+[INFO] 22:16:06:680 MEMORIA/(3503:3503): [MEMORIA]: Servidor iniciado correctamente.
+[INFO] 22:16:13:245 MEMORIA/(3503:3503): Cliente: 5

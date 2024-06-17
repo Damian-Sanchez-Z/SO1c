@@ -21,7 +21,6 @@ int main(int argc, char* argv[]) {
         //pthread_detach(unHilo);
     }
     close(socket_memoria);
-    free(logger);
     return EXIT_SUCCESS;
 
 }
