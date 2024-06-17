@@ -18,7 +18,6 @@ void iniciar_config_memoria(char* config_path)
 	config.retardo_respuesta = config_get_int_value(config_raw, "RETARDO_RESPUESTA");
 
 	log_info(logger, "[MEMORIA]: Configuracion inicial exitosa.");
-	config_destroy(config_raw);
 }
 
 int iniciar_servidor_memoria()
