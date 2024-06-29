@@ -2,27 +2,18 @@
 
 int socket_cpu_dispatch;
 int socket_cpu_interrupt;
+int socket_cpu;
+int socket_memoria;
+int socket_kernel;
 
-Config *config;
+Config config;
 
-int iniciar_config_cpu(char* path)
-{
-    config = config_create(path);
-    if(config == NULL)
-    {
-        log_error(logger,"[CPU]: ERROR AL INICIAR CONFIG INICIAL");
-        return FAILURE;
-    }
-    cargar_configuracion_cpu(config);
-    log_info(logger, "[CPU]: Archivo Config creado y rellenado correctamente");
-    return SUCCESS;
-}
 
-int iniciar_servidor_cpu(char* ip)
+int iniciar_servidor_cpu()
 {
     log_info(logger, "[CPU]: Iniciando Servidores De Dispatch e Interrupt...");
-    socket_cpu_dispatch = iniciar_servidor(ip, CPUConfig.PUERTO_ESCUCHA_DISPATCH);
-    socket_cpu_interrupt = iniciar_servidor(ip, CPUConfig.PUERTO_ESCUCHA_INTERRUPT);
+    socket_cpu_dispatch = iniciar_servidor(string_itoa(CPUConfig.PUERTO_ESCUCHA_DISPATCH));
+    socket_cpu_interrupt = iniciar_servidor(string_itoa(CPUConfig.PUERTO_ESCUCHA_INTERRUPT));
 
     if (socket_cpu_dispatch < 0 || socket_cpu_interrupt < 0)
     {
@@ -37,7 +28,7 @@ int iniciar_servidor_cpu(char* ip)
 int conectar_con_memoria()
 {
     log_info(logger, "[CPU] conectando con memoria...");
-    socket_memoria = crear_conexion_con_servidor(CPUConfig.IP_MEMORIA, CPUConfig.PUERTO_MEMORIA);
+    socket_memoria = crear_conexion_con_servidor(CPUConfig.IP_MEMORIA, string_itoa(CPUConfig.PUERTO_MEMORIA));
 
     if (socket_memoria < 0)
     {
@@ -51,10 +42,15 @@ int conectar_con_memoria()
 void conectar_con_kernel()
 {
     log_info(logger, "[CPU]: Esperando conexiones de KERNEL..");
-    socket_kernel = esperar_cliente(socket_kernel);
-    log_info(logger, "[CPU]: Conexión de KERNEL establecida.");
 
-    //crear hilo
+    socket_kernel = esperar_cliente(socket_cpu_dispatch);
+    log_info(logger, "[CPU]: Conexión dispatch de KERNEL establecida.", socket_kernel);
+
+    socket_kernel = esperar_cliente(socket_cpu_interrupt);
+    log_info(logger, "[CPU]: Conexión interrupt de KERNEL establecida.", socket_kernel);
+
+    //pthread_create(&hilo_kernel, NULL, (void *)manejar_paquete_kernel, (void *)socket_kernel);
+    //pthread_join(hilo_kernel, NULL);
 }
 
 void terminar_ejecucion()
@@ -71,53 +67,53 @@ void asignar_a_registro(char *valor, char *registro_instr, PCB *pcb)
 
     if(!strcmp(registro_instr,"AX"))
     {
-        strncpy(reg_cpu.AX, valor, 1);
-        reg_cpu.AX[1] = '\0';
+        strncpy(reg_cpu->AX, valor, 1);
+        reg_cpu->AX = '\0';
     }
     else if(!strcmp(registro_instr,"BX"))
     {
-        strncpy(reg_cpu.BX, valor, 1);
-        reg_cpu.BX[1] = '\0';
+        strncpy(reg_cpu->BX, valor, 1);
+        reg_cpu->BX = '\0';
     }
     else if(!strcmp(registro_instr,"CX"))
     {
-        strncpy(reg_cpu.CX, valor, 1);
-        reg_cpu.CX[1] = '\0';
+        strncpy(reg_cpu->CX, valor, 1);
+        reg_cpu->CX = '\0';
     }
     else if(!strcmp(registro_instr,"DX"))
     {
-        strncpy(reg_cpu.DX, valor, 1);
-        reg_cpu.DX[1] = '\0';
+        strncpy(reg_cpu->DX, valor, 1);
+        reg_cpu->DX = '\0';
     }
     else if(!strcmp(registro_instr,"EAX"))
     {
-        strncpy(reg_cpu.EAX, valor, 4);
-        reg_cpu.EAX[4] = '\0';
+        strncpy(reg_cpu->EAX, valor, 4);
+        reg_cpu->EAX = '\0';
     }
     else if(!strcmp(registro_instr,"EBX"))
     {
-        strncpy(reg_cpu.EBX, valor, 4);
-        reg_cpu.EBX[4] = '\0';
+        strncpy(reg_cpu->EBX, valor, 4);
+        reg_cpu->EBX = '\0';
     }
     else if(!strcmp(registro_instr,"ECX"))
     {
-        strncpy(reg_cpu.ECX, valor, 4);
-        reg_cpu.ECX[4] = '\0';
+        strncpy(reg_cpu->ECX, valor, 4);
+        reg_cpu->ECX = '\0';
     }
     else if(!strcmp(registro_instr,"EDX"))
     {
-        strncpy(reg_cpu.EDX, valor, 4);
-        reg_cpu.EDX[4] = '\0';
+        strncpy(reg_cpu->EDX, valor, 4);
+        reg_cpu->EDX = '\0';
     }
     else if(!strcmp(registro_instr,"SI"))
     {
-        strncpy(reg_cpu.SI, valor, 4);
-        reg_cpu.SI[4] = '\0';
+        strncpy(reg_cpu->SI, valor, 4);
+        reg_cpu->SI = '\0';
     }
     else if(!strcmp(registro_instr,"DI"))
     {
-        strncpy(reg_cpu.DI, valor, 4);
-        reg_cpu.DI[4] = '\0';
+        strncpy(reg_cpu->DI, valor, 4);
+        reg_cpu->DI = '\0';
     } 
     else
     {
@@ -172,12 +168,12 @@ char *obtener_valor_registro(Registro_CPU registros_pcb, char *registro_buscado)
     }
     else if (!strcmp(registro_buscado, "SI"))
     {
-        strncpy(valor, registros_pcb->SI, 8);
+        strncpy(valor, registros_pcb.SI, 8);
         valor[16] = '\0';
     }
     else if (!strcmp(registro_buscado, "DI"))
     {
-        strncpy(valor, registros_pcb->DI, 8);
+        strncpy(valor, registros_pcb.DI, 8);
         valor[16] = '\0';
     }
     else
@@ -251,12 +247,12 @@ int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb) // EXECUTE //CADA I
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "WAIT")) //Listo
     {
-        ejecutar_wait(paquete, Instruccion, pcb);
+        //ejecutar_wait(paquete, Instruccion, pcb);
         return 0;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "SIGNAL")) //Listo
     {
-        ejecutar_signal(paquete, Instruccion, pcb);
+        //ejecutar_signal(paquete, Instruccion, pcb);
         return 0;
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "IO_FS_CREATE")) 
@@ -286,7 +282,7 @@ int ejecutar_instruccion(Instruccion *Instruccion, PCB *pcb) // EXECUTE //CADA I
     }
     else if (!strcmp(Instruccion->nombreInstruccion, "EXIT"))
     {
-        ejecutar_exit(paquete, pcb);
+        //ejecutar_exit(paquete, pcb);
         return 0;
     }
     else
@@ -316,9 +312,9 @@ void ejecutar_SUM(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb)
                 instruccion->registro_destino,
                 instruccion->registro_origen);
 
-    char *valor_registro_origen = obtener_valor_registro(pcb->registros_cpu,instruccion->registro_origen);
-    char *valor_registro_destino = obtener_valor_registro(pcb->registros_cpu,instruccion->registro_destino);
-    char *resultado = valor_registro_destino + valor_registro_origen;
+    int32_t valor_registro_origen = obtener_valor_registro(pcb->registros_cpu,instruccion->registro_origen);
+    int32_t valor_registro_destino = obtener_valor_registro(pcb->registros_cpu,instruccion->registro_destino);
+    int32_t resultado = valor_registro_destino + valor_registro_origen;
     
     asignar_a_registro(resultado, instruccion->registro_destino, pcb);
     eliminar_paquete(paquete);
@@ -369,7 +365,7 @@ void ejecutar_io_gen_sleep(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb)
                 instruccion->IO_Interface.nombre,
                 instruccion->unidades_de_trabajo);
 
-    PAQUETE *paquete_kernel = crear_paquete(paquete);
+    PAQUETE *paquete_kernel = crear_paquete(OP_PAQUETE);
     agregar_a_paquete(paquete_kernel, &pcb->PID, sizeof(int32_t));
     agregar_a_paquete(paquete_kernel, &pcb->program_counter, sizeof(int32_t));
     agregar_a_paquete(paquete_kernel, &pcb->registros_cpu, sizeof(Registro_CPU));
@@ -384,5 +380,5 @@ void ejecutar_io_gen_sleep(PAQUETE *paquete, Instruccion *instruccion, PCB *pcb)
 //hay que probar esto, no creo que funcione
 void cambiarValorProgramCounter(char *valor, PCB *pcb){
     strncpy(pcb->program_counter,valor,4);
-    pcb->program_counter[4] = '\0';
+    pcb->program_counter = '\0';
 }

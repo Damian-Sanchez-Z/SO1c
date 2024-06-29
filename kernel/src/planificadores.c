@@ -8,7 +8,6 @@ t_list exit_state;
 int64_t PID;
 
 kernel_config KernelConfig;
-int socket_cpu;
 
 
 PCB* enviarACPU(PCB* pcb){
@@ -18,7 +17,7 @@ PCB* enviarACPU(PCB* pcb){
 
     Instruccion* instruccion_enviar = list_get(&pcb->instructions, pcb->program_counter);
 
-    enviar_paquete_a_servidor(paquete_pcb, socket_cpu);
+    enviar_paquete_a_servidor(paquete_pcb, socket_cpu_dispatch);
 
     eliminar_paquete(paquete_pcb);
 

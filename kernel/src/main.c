@@ -8,22 +8,23 @@ int main(int argc, char** argv) {
 
     logger = iniciar_logger("Kernel", "kernel.log");
 
-    log_info(logger, "A1");
-
     char* config_path = argv[1];
-
-    log_info(logger, "A2");
 
     if(iniciar_config_kernel(config_path) == FAILURE)
         return EXIT_FAILURE;
 
-    log_info(logger, "A3");
 
-    iniciar_servidor_kernel(argv[2]);
+    if (iniciar_servidor_kernel() == SUCCESS)
+    {
+        if (conectar_con_memoria() == FAILURE)
+            return EXIT_FAILURE;
 
-    log_info(logger, "A4");
+        if (conectar_con_cpu() == FAILURE)
+            return EXIT_FAILURE;
+
+        conectar_con_io();
+    }
 
     return EXIT_SUCCESS;
 }
-
 

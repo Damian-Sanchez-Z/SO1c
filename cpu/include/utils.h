@@ -4,6 +4,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "config.h"
+#include<commons/log.h>
+#include<commons/string.h>
+#include<commons/config.h>
 
 #define ARCHIVO_LOGGER "config/cpu.log"
 #define ARCHIVO_CONFIG "config/cpu.config"
@@ -16,18 +19,17 @@
 #define SUCCESS 0
 #define FAILURE 1
 
-extern Logger *logger;
-extern Config *config;
+extern Logger logger;
+extern Config config;
 extern Hilo hilo_kernel;
 
 extern int socket_cpu_dispatch;
 extern int socket_cpu_interrupt;
 extern int socket_memoria;
+extern int socket_cpu;
 extern int socket_kernel;
 
-void iniciar_logger_cpu();
-int iniciar_config_cpu(char* path);
-int iniciar_servidor_cpu(char* ip);
+int iniciar_servidor_cpu();
 int conectar_con_memoria();
 void conectar_con_kernel();
 void terminar_ejecucion();

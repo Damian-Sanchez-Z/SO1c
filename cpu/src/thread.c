@@ -1,6 +1,8 @@
 #include "../include/thread.h"
 
-  PCB * recibir_pcb(int socket_kernel){
+Logger logger;
+
+PCB * recibir_pcb(int socket_kernel){
 
 	BUFFER* buffer = recibir_buffer(socket_kernel);
 

@@ -18,11 +18,11 @@
 #include "server.h"
 #include "socket.h"
 
-typedef t_config Config;
+typedef t_config* Config;
+typedef t_log* Logger;
 typedef t_list Lista;
 typedef pthread_t Hilo;
 
-extern t_log* logger;
 
 typedef enum
 {
@@ -79,6 +79,13 @@ typedef struct
 
 } PCB;
 
+typedef struct
+{
+    int32_t id;
+    char* nombre;
+
+} IO_Interface;
+
 typedef struct 
 {
     char* nombreInstruccion;
@@ -87,7 +94,7 @@ typedef struct
     char* registro_origen;
     char* registro_destino;
     char* numeroDeInstruccion;
-    //IO_Interface IO_Interface;
+    IO_Interface IO_Interface;
     int32_t unidades_de_trabajo;
     //--------------//
     int32_t direccionLogica;
@@ -108,6 +115,7 @@ typedef struct
     
 } Instruccion;
 
+
 typedef struct
 {
     int size;
@@ -126,6 +134,7 @@ void agregar_a_paquete(PAQUETE *paquete, void *valor, int tamanio);
 void *serializar_paquete(PAQUETE *paquete, int bytes);
 void enviar_paquete_a_servidor(PAQUETE *paquete, int socketCliente);
 void enviar_paquete_a_cliente(PAQUETE *paquete, int socketCliente);
+void enviar_mensaje_a_servidor(char *mensaje, int socketCliente);
 PCB *deserializar_pcb(BUFFER *buffer);
 BUFFER* recibir_buffer(int socket);
 

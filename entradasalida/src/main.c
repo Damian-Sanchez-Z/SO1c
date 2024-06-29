@@ -1,20 +1,26 @@
 #include "../include/main.h"
-int socket_clienteDeKernel;
-int socket_clienteDeMemoria;
-
 int main(int argc, char* argv[]) {
-
-    iniciar_logger("Kernel", "configs/kernel.log");
+    
+    nombre = argv[2];
+    iniciar_logger_interfaz();
 
     char* config_path = argv[1];
 
-    if(iniciar_config_interfaz(config_path) == 0) 
+    if(iniciar_config_interfaz(config_path) == FAILURE) 
         return EXIT_FAILURE;
 
-    log_info(logger, "[INTERFAZ]: Conexion con KERNEL:.");
-    socket_clienteDeKernel = iniciar_cliente_interfaz(config_io.IP_KERNEL, config_io.PUERTO_KERNEL);
-    log_info(logger, "[INTERFAZ]: Conexion con MEMORIA:.");
-    socket_clienteDeMemoria = iniciar_cliente_interfaz(config_io.IP_MEMORIA, config_io.PUERTO_MEMORIA);
+    if(tipo_interfaz == GENERICA){
+            conexion_con_kernel = iniciar_cliente_interfaz(configuracion.IP_KERNEL, configuracion.PUERTO_KERNEL, "KERNEL");
+            //int confirmacion_kernel = handshake_con_servidor(conexion_con_kernel);
+    }else{
+            conexion_con_kernel = iniciar_cliente_interfaz(configuracion.IP_KERNEL, configuracion.PUERTO_KERNEL, "KERNEL");
+            conexion_con_memoria = iniciar_cliente_interfaz(configuracion.IP_MEMORIA, configuracion.PUERTO_MEMORIA, "MEMORIA");
+            //int confirmacion_kernel = handshake_con_servidor(conexion_con_kernel);
+            //int confirmacion_memoria = handshake_con_servidor(conexion_con_memoria);
+    }
+    liberar_conexion_con_servidor(conexion_con_kernel);
+    liberar_conexion_con_servidor(conexion_con_memoria);
+    log_destroy(logger);
     return EXIT_SUCCESS;
 }
 
