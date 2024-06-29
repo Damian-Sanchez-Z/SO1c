@@ -1,5 +1,7 @@
 #include "../include/config.h"
 MEM_CONFIG config;
+int socket_memoria;
+
 void iniciar_config_memoria(char* config_path)
 {
 	t_config *config_raw = config_create(config_path);
@@ -23,15 +25,26 @@ void iniciar_config_memoria(char* config_path)
 int iniciar_servidor_memoria()
 {
     log_info(logger, "[MEMORIA]: Iniciando Servidor");
-    int socket_memoria = iniciar_servidor(string_itoa(config.puerto));
-
+    socket_memoria = iniciar_servidor(string_itoa(config.puerto));
     if (socket_memoria < 0)
     {
         log_error(logger, "[MEMORIA]: Error intentando iniciar Servidor.");
-        return EXIT_FAILURE;
+        return FAILURE;
     }
 
-    log_info(logger, "[MEMORIA]: Servidor iniciado correctamente.");
-    return socket_memoria;
+    return SUCCESS;
+}
+
+int conectar_con_io()
+{
+    while(true){
+
+        log_info(logger, "[KERNEL] Esperando nueva interfaz IO...");
+
+        int socket_interfaz = esperar_cliente(socket_memoria);
+        log_info(logger, "[CPU]: Conexión con IO [%i] establecida.", socket_interfaz);
+
+        //TODO: HILOS
+    }
 }
 

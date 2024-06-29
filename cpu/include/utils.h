@@ -26,6 +26,7 @@ extern Hilo hilo_kernel;
 extern int socket_cpu_dispatch;
 extern int socket_cpu_interrupt;
 extern int socket_memoria;
+extern int socket_cpu;
 extern int socket_kernel;
 
 int iniciar_servidor_cpu();

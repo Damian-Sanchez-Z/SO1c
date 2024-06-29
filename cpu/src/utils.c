@@ -2,6 +2,7 @@
 
 int socket_cpu_dispatch;
 int socket_cpu_interrupt;
+int socket_cpu;
 int socket_memoria;
 int socket_kernel;
 
@@ -41,10 +42,15 @@ int conectar_con_memoria()
 void conectar_con_kernel()
 {
     log_info(logger, "[CPU]: Esperando conexiones de KERNEL..");
-    socket_kernel = esperar_cliente(socket_kernel);
-    log_info(logger, "[CPU]: Conexión de KERNEL establecida.");
 
-    //crear hilo
+    socket_kernel = esperar_cliente(socket_cpu_dispatch);
+    log_info(logger, "[CPU]: Conexión dispatch de KERNEL establecida.", socket_kernel);
+
+    socket_kernel = esperar_cliente(socket_cpu_interrupt);
+    log_info(logger, "[CPU]: Conexión interrupt de KERNEL establecida.", socket_kernel);
+
+    //pthread_create(&hilo_kernel, NULL, (void *)manejar_paquete_kernel, (void *)socket_kernel);
+    //pthread_join(hilo_kernel, NULL);
 }
 
 void terminar_ejecucion()

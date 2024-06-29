@@ -134,6 +134,7 @@ void agregar_a_paquete(PAQUETE *paquete, void *valor, int tamanio);
 void *serializar_paquete(PAQUETE *paquete, int bytes);
 void enviar_paquete_a_servidor(PAQUETE *paquete, int socketCliente);
 void enviar_paquete_a_cliente(PAQUETE *paquete, int socketCliente);
+void enviar_mensaje_a_servidor(char *mensaje, int socketCliente);
 PCB *deserializar_pcb(BUFFER *buffer);
 BUFFER* recibir_buffer(int socket);
 

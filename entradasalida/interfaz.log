@@ -16,3 +16,9 @@
 [INFO] 23:32:29:887 Mai/(37655:37655): [Mai]: Archivo Config creado y rellenado correctamente.
 [INFO] 23:35:16:907 Mai/(37811:37811): [Mai]: Logger creado correctamente.
 [INFO] 23:35:16:907 Mai/(37811:37811): [Mai]: Archivo Config creado y rellenado correctamente.
+[INFO] 22:03:34:123 Mai/(71124:71124): [Mai]: Logger creado correctamente.
+[INFO] 22:03:34:139 Mai/(71124:71124): [Mai]: Archivo Config creado y rellenado correctamente.
+[INFO] 22:03:34:139 Mai/(71124:71124): [Mai]: Iniciando conexion con KERNEL
+[INFO] 22:03:34:140 Mai/(71124:71124): [Mai]: Conexion con KERNEL exitosa.
+[INFO] 22:03:34:140 Mai/(71124:71124): [Mai]: Iniciando conexion con MEMORIA
+[INFO] 22:03:34:140 Mai/(71124:71124): [Mai]: Conexion con MEMORIA exitosa.

@@ -14,7 +14,10 @@ typedef struct{
 
 void iniciar_config_memoria(char* config_path);
 int iniciar_servidor_memoria();
+int conectar_con_io();
 
 extern t_log* logger;
+
+extern int socket_memoria;
 
 #endif //MEMORIA_CONFIG_H

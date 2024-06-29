@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
     if(iniciar_config_cpu(config_path) == FAILURE)
         return EXIT_FAILURE;
 
-    iniciar_servidor_cpu();
+    socket_cpu = iniciar_servidor_cpu();
 
     int respuesta_conexion = conectar_con_memoria();
     if(respuesta_conexion != SUCCESS)
@@ -21,6 +21,9 @@ int main(int argc, char* argv[]) {
     }
   
     conectar_con_kernel();
+
+    while(1){}
+
     terminar_ejecucion();
     
     return EXIT_SUCCESS;

@@ -34,8 +34,12 @@ typedef struct kernel_config
 } kernel_config;
 
 extern kernel_config KernelConfig;
-extern int socket_cpu;
+extern int socket_cpu_dispatch;
+extern int socket_cpu_interrupt;
 extern t_log* logger;
 
 int iniciar_config_kernel(char*);
 int iniciar_servidor_kernel();
+int conectar_con_memoria();
+int conectar_con_cpu();
+int conectar_con_io();

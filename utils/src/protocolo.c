@@ -11,6 +11,18 @@ PAQUETE *crear_paquete(CODIGO_OPERACION codigoOperacion)
     return paquete;
 }
 
+void enviar_mensaje_a_servidor(char *mensaje, int socketCliente)
+{
+    PAQUETE *paquete = crear_paquete(MENSAJE);
+
+    paquete->buffer->size = strlen(mensaje) + 1;
+    paquete->buffer->stream = malloc(paquete->buffer->size);
+    memcpy(paquete->buffer->stream, mensaje, paquete->buffer->size);
+
+    enviar_paquete_a_servidor(paquete, socketCliente);
+    eliminar_paquete(paquete);
+}
+
 void eliminar_paquete(PAQUETE *paquete)
 {
     if (paquete != NULL)

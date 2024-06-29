@@ -12,7 +12,6 @@
 #include "../include/config.h"
 
 t_log* logger;
-int socket_memoria;
 
 void *atender_cliente(void *args);
 #endif
