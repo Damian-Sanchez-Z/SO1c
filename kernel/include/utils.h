@@ -1,3 +1,7 @@
+
+#ifndef KERNEL_UTILS_H
+#define KERNEL_UTILS_H
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<signal.h>
@@ -17,6 +21,7 @@
 #define ARCHIVO_CONFIG "config/kernel.config"
 #define SUCCESS 0
 #define FAILURE -1
+#endif //KERNEL_UTILS_H
 
 typedef struct kernel_config
 {
@@ -33,10 +38,18 @@ typedef struct kernel_config
     char *GRADO_MULTIPROGRAMACION;
 } kernel_config;
 
+typedef enum
+{
+    EXIT,
+    WAIT,
+    SIGNAL
+} Comando;
+
 extern kernel_config KernelConfig;
 extern int socket_cpu_dispatch;
 extern int socket_cpu_interrupt;
 extern t_log* logger;
+t_queue *cola_ready;
 
 int iniciar_config_kernel(char*);
 int iniciar_servidor_kernel();

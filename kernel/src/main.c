@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "../include/utils.h"
+#include "../include/controlador.h"
 
 t_log* logger;
 
@@ -24,7 +25,7 @@ int main(int argc, char** argv) {
 
         conectar_con_io();
     }
-
+    crear_recursos(KernelConfig.RECURSOS, KernelConfig.INSTANCIAS_RECURSOS);
     return EXIT_SUCCESS;
 }
 
